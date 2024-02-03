@@ -89,4 +89,7 @@ export default App;
 
 ```
 
+- It is always better to create react app with Vite, enter this command in terminal ``npm create vite@latest`` and select ``react`` with arrow keys.
+- Once app is created enter ``npm i`` or ``npm install``
+- Lastly run ``npm run dev``
 
