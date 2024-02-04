@@ -1,0 +1,97 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: rgb(125, 0, 125);
+  color: white;
+}
+* {
+  margin: 0;
+}
+.list {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+li:hover {
+  cursor: pointer;
+}
+.underline {
+  display: inline-block;
+  position: relative;
+}
+.underline::after {
+  height: 5px;
+  width: 5px;
+  left: 50%;
+  border-radius: 150px;
+  position: absolute;
+  bottom: 90%;
+  background-color: lightgreen;
+  content: "";
+  transform: scaleX(0);
+  transition: transform ease-in-out 0.1s;
+}
+.underline:hover::after {
+  transform: scaleX(1);
+}
+.underline:hover {
+  bottom: 1px;
+}
+
+@media screen and (max-width: 400px) {
+  .underline {
+    display: none;
+  }
+  button {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 400px) {
+  button {
+    display: none;
+  }
+}
+
+.subContainer {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(0, 0, 0);
+  opacity: 90%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+}
+.cross {
+  align-self: flex-end;
+  margin-right: 1rem;
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+.buttonUl {
+  color: white;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-size: large;
+}
+
+.menu {
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+
+@media screen and (min-width: 400px) {
+  .subContainer {
+    display: none;
+  }
+}
