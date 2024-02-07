@@ -7,6 +7,7 @@ function Navbar() {
     <>
       <nav className="container">
         <h1>Gajanan</h1>
+
         <ul className="list">
           <li className="underline">Home</li>
           <li className="underline">Contact</li>
