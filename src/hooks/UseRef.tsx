@@ -1,4 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
+/*
+ * UseRef holds the value assigned to it even after a rerender unlike a normal variable
+ */
 
 // function UseRef() {
 //   let [val, setVal] = useState(1000);
