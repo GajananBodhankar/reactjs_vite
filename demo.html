@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        height: 100vh;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .item {
+        border: 1px solid black;
+        height: 30px;
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+    <select name="country" id="country">
+      <option value="India">India</option>
+      <option value="America">America</option>
+    </select>
+    <script>
+      let select = document.querySelector("select");
+      select.addEventListener("change", (e) => {
+          console.log(e.target.value);
+          console.log(select.selectedIndex);
+        });
+    </script>
+  </body>
+</html>
