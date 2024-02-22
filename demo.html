@@ -1,45 +1,21 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-      .container {
-        height: 100vh;
-        display: flex;
-        flex-wrap: wrap;
-      }
-      .item {
-        border: 1px solid black;
-        height: 30px;
-        width: 200px;
-      }
-    </style>
   </head>
   <body>
-    <div class="container">
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-    </div>
-    <select name="country" id="country">
-      <option value="India">India</option>
-      <option value="America">America</option>
-    </select>
+    <form action="#" id="form">
+      <input type="text" name="username" />
+      <input type="text" name="email" />
+      <input type="submit" value="Submit" />
+    </form>
     <script>
-      let select = document.querySelector("select");
-      select.addEventListener("change", (e) => {
-          console.log(e.target.value);
-          console.log(select.selectedIndex);
-        });
+      let form = document.querySelector("#form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log(e.target.elements.email.value);
+      });
     </script>
   </body>
 </html>
