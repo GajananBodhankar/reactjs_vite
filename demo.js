@@ -33,7 +33,7 @@
   [9, 6, 3],
 ];
 
-function transpose(mat) {
+async function transpose(mat) {
   let arr = [];
   for (let i = 0; i < mat.length; i++) {
     let temp = [];
@@ -43,6 +43,10 @@ function transpose(mat) {
     arr.push(temp.reverse());
   }
   console.log(arr);
+  let response = await fetch("https://dummyjson.com/products");
+  let data = await response.json();
+  // return data;
+  console.log(data);
 }
 
 transpose([
