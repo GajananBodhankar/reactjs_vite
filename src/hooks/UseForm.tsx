@@ -9,7 +9,11 @@ function UseForm() {
   } = useForm();
   return (
     <div>
-      <form action="" onSubmit={handleSubmit((e) => console.log(e.target))}>
+      <form
+        action=""
+        method=""
+        onSubmit={handleSubmit((e) => console.log(e.target))}
+      >
         <input
           {...register("username", {
             required: true,
