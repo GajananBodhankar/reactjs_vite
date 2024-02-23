@@ -6,7 +6,6 @@ import React, { useEffect, useRef, useState } from "react";
 function UseRef() {
   let [val, setVal] = useState(1000);
   let a = 0;
-
   return (
     <button
       onClick={() => {
