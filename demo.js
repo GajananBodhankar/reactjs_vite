@@ -19,15 +19,34 @@
 // console.log(response(10));
 // console.log(response(10));
 
-function frequency(arr) {
-  let m = new Map();
-  arr.forEach((i) => {
-    if (m.has(i)) {
-      m.set(i, m.get(i) + 1);
-    } else {
-      m.set(i, 1);
+[
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+];
+
+// ===>
+
+[
+  [7, 4, 1],
+  [8, 5, 2],
+  [9, 6, 3],
+];
+
+function transpose(mat) {
+  let arr = [];
+  for (let i = 0; i < mat.length; i++) {
+    let temp = [];
+    for (let j = 0; j < mat.length; j++) {
+      temp.push(mat[j][i]);
     }
-  });
-  console.log(Array.from(m).sort((a, b) => (a[0] > b[0] ? 1 : -1)));
+    arr.push(temp.reverse());
+  }
+  console.log(arr);
 }
-frequency(["aman", "aman", "aman", "aa", "aa"]);
+
+transpose([
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+]);
