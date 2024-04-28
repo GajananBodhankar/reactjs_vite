@@ -6,7 +6,6 @@ function Model(props: any) {
     <div
       id="model"
       onClick={(e) => {
-        console.log(e.target);
         if (e.target != mainref.current) {
           props.setShow((prev) => !prev);
         }
