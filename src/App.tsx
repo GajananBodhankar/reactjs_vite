@@ -36,6 +36,7 @@ import "swiper/css/navigation";
 
 import "./App.css";
 import Image from "./ImageUpload/Image";
+import Main from "./Model/Main";
 
 export default function App() {
   // Create array with 500 slides
@@ -45,7 +46,7 @@ export default function App() {
 
   return (
     <>
-      <Image />
+      {/* <Image />
       <Swiper
         modules={[Virtual, Navigation, Pagination]}
         slidesPerView={7}
@@ -58,7 +59,8 @@ export default function App() {
             {slideContent}
           </SwiperSlide>
         ))}
-      </Swiper>
+      </Swiper> */}
+      <Main />
     </>
   );
 }
