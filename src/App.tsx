@@ -37,6 +37,9 @@ import "swiper/css/navigation";
 import "./App.css";
 import Image from "./ImageUpload/Image";
 import Main from "./Model/Main";
+import { Provider } from "react-redux";
+import Index from "./ReduxClass/Index";
+import { Store } from "./ReduxClass/Store";
 
 export default function App() {
   // Create array with 500 slides
@@ -60,7 +63,10 @@ export default function App() {
           </SwiperSlide>
         ))}
       </Swiper> */}
-      <Main />
+      {/* <Main /> */}
+      <Provider store={Store}>
+        <Index />
+      </Provider>
     </>
   );
 }
