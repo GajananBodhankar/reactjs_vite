@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { connect } from "react-redux";
 interface IndexState {}
 interface IndexProps {
@@ -7,17 +7,15 @@ interface IndexProps {
   apiCall: () => void;
 }
 function apiCall() {
-  return async (dispatch) => {
+  return async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     dispatch({ type: "loading" });
-    fetch("https://jsonplaceholder.typicode.com/todos")
-      .then((e) => e.json())
-      .then((i) => dispatch({ type: "success", payload: i }))
-      .catch((e) => dispatch({ type: "failed" }));
-    //   let data = await result.json();
-    //   dispatch({ type: "success", payload: data });
-    // } catch (error) {
-    //   dispatch({ type: "failed" });
-    // }
+    try {
+      let result = await fetch("https://jsonplaceholder.typicode.com/todos");
+      let data = await result.json();
+      dispatch({ type: "success", payload: data });
+    } catch (error) {
+      dispatch({ type: "failed" });
+    }
   };
 }
 class Index extends Component<IndexProps, IndexState> {
@@ -35,7 +33,9 @@ class Index extends Component<IndexProps, IndexState> {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: {
+  reducerApiCall: { data: any; status: any };
+}) => ({
   data: state.reducerApiCall.data,
   status: state.reducerApiCall.status,
 });
