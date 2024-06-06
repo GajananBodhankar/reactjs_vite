@@ -20,7 +20,7 @@ console.log(response(10));
 console.log(response(10));
 
 check();
-
+// Hoisting
 function check() {
   console.log("hello");
 }
