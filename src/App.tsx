@@ -40,6 +40,8 @@ import Main from "./Model/Main";
 import { Provider } from "react-redux";
 import Index from "./ReduxClass/Index";
 import { Store } from "./ReduxClass/Store";
+import WithReactMemo from "./InterviewQuestion/WithReactMemo";
+import Child from "./InterviewQuestion/Child";
 
 export default function App() {
   // Create array with 500 slides
@@ -64,9 +66,12 @@ export default function App() {
         ))}
       </Swiper> */}
       {/* <Main /> */}
-      <Provider store={Store}>
+      {/* <Provider store={Store}>
         <Index />
-      </Provider>
+      </Provider> */}
+      <WithReactMemo>
+        <Child />
+      </WithReactMemo>
     </>
   );
 }
