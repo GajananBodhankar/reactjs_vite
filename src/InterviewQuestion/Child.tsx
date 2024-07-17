@@ -7,4 +7,4 @@ function Child() {
   return <p>I am child</p>;
 }
 
-export default React.memo(Child);
+export default Child;
