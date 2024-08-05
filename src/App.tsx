@@ -43,6 +43,7 @@ import { Store } from "./ReduxClass/Store";
 import WithReactMemo from "./InterviewQuestion/WithReactMemo";
 import Child from "./InterviewQuestion/Child";
 import SignalsComponent from "./Signals/Signals";
+import WorkerComponent from "./Worker/WorkerComponent";
 
 export default function App() {
   // Create array with 500 slides
@@ -73,7 +74,8 @@ export default function App() {
       {/* <WithReactMemo>
         <Child />
       </WithReactMemo> */}
-      <SignalsComponent/>
+      {/* <SignalsComponent/> */}
+      <WorkerComponent/>
     </>
   );
 }
