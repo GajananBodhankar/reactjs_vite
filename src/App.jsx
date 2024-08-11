@@ -51,9 +51,12 @@ export default function App() {
   const [slides, setSlides] = useState(
     Array.from({ length: 500 }).map((_, index) => `Slide ${index + 1}`)
   );
-
+var  [state,setState]=useState(0)
+state=32
   return (
     <>
+    <p>{state}</p>
+    <button onClick={()=>state=11}>Increment</button>
       {/* <Image />
       <Swiper
         modules={[Virtual, Navigation, Pagination]}
@@ -77,7 +80,7 @@ export default function App() {
       </WithReactMemo> */}
       {/* <SignalsComponent/> */}
       {/* <WorkerComponent/> */}
-      <Parent/>
+      {/* <Parent/> */}
     </>
   );
 }
