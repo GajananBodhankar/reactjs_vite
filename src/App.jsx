@@ -1,86 +1,58 @@
-// import { useState } from "react";
-// import Navbar from "./components/Navbar.tsx";
-// import UseRef from "./hooks/UseRef.tsx";
-// import UseMemo from "./hooks/useMemo.tsx";
-// import UseCallback from "./hooks/UseCallback.tsx";
-// import UseForm from "./hooks/UseForm.tsx";
-// import { Provider } from "react-redux";
-// import SagaStore from "./ReduxSaga/SagaStore.ts";
-// import Index from "./ReduxSaga/Index.tsx";
+import React, { useEffect, useRef, useState } from "react";
+function reducer(state = { count: 0 }, action) {
+  switch (action.type) {
+    case "Increment": {
+      return { count: (state.count ?? 0) + 1 };
+    }
+    case "Decrement": {
+      return { count: (state.count ?? 0) - 1 };
+    }
+  }
+}
 
-// function App() {
-//   const [count, setCount] = useState(0);
-//   // return <Navbar />;
-//   // return <UseRef />;
-//   // return <UseMemo />;
-//   // return <UseCallback />;
-//   // return <UseForm />;
-//   return (
-//     <Provider store={SagaStore}>
-//       {/* <Index /> */}
-//       <Index />
-//     </Provider>
-//   );
-// }
+function createStore(reducer) {
+  let state = { count: 0 },
+    subscribers = [];
+  function getState() {
+    return state;
+  }
+  function dispatch(action) {
+    state = reducer(state, action);
+    console.log(state);
+    subscribers.forEach((i) => {
+      console.log(i);
+      i(state.count);
+    });
+    console.log(state);
+  }
+  function subscribe(callback) {
+    subscribers.push(callback);
+  }
+  return { getState, dispatch, subscribe };
+}
 
-// export default App;
+const store = createStore(reducer);
 
-import React, { useRef, useState } from "react";
-import { Virtual, Navigation, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+function App() {
+  const state = store.getState();
+  const [count, setCount] = useState(state.count);
+  useEffect(() => {
+    store.subscribe((value) => setCount(value));
+  }, []);
 
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-
-import "./App.css";
-import Image from "./ImageUpload/Image";
-import Main from "./Model/Main";
-import { Provider } from "react-redux";
-import Index from "./ReduxClass/Index";
-import { Store } from "./ReduxClass/Store";
-import WithReactMemo from "./InterviewQuestion/WithReactMemo";
-import Child from "./InterviewQuestion/Child";
-import SignalsComponent from "./Signals/Signals";
-import WorkerComponent from "./Worker/WorkerComponent";
-import Parent from "./ForwardRef/Parent";
-
-export default function App() {
-  // Create array with 500 slides
-  const [slides, setSlides] = useState(
-    Array.from({ length: 500 }).map((_, index) => `Slide ${index + 1}`)
-  );
-var  [state,setState]=useState(0)
-state=32
   return (
-    <>
-    <p>{state}</p>
-    <button onClick={()=>state=11}>Increment</button>
-      {/* <Image />
-      <Swiper
-        modules={[Virtual, Navigation, Pagination]}
-        slidesPerView={7}
-        spaceBetween={30}
-        navigation={true}
-        virtual
+    <div>
+      <button
+        onClick={() => {
+          store.dispatch({ type: "Increment" });
+          // setCount(state.count);
+        }}
       >
-        {slides.map((slideContent, index) => (
-          <SwiperSlide key={slideContent} virtualIndex={index}>
-            {slideContent}
-          </SwiperSlide>
-        ))}
-      </Swiper> */}
-      {/* <Main /> */}
-      {/* <Provider store={Store}>
-        <Index />
-      </Provider> */}
-      {/* <WithReactMemo>
-        <Child />
-      </WithReactMemo> */}
-      {/* <SignalsComponent/> */}
-      {/* <WorkerComponent/> */}
-      {/* <Parent/> */}
-    </>
+        increment
+      </button>
+      <p>{count}</p>
+    </div>
   );
 }
+
+export default App;
