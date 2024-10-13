@@ -60,9 +60,11 @@
 
 import React from "react";
 import TrafficLights from "./TrafficLights/TrafficLights";
+import Debouncing from "./hooks/useDebounce";
 
 function App() {
-  return <TrafficLights />;
+  // return <TrafficLights />;
+  return <Debouncing />;
 }
 
 export default App;
