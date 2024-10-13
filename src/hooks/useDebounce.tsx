@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function useDebounce(value, timer = 1000) {
+function useDebounce(value: unknown, timer = 1000) {
   const [dvalue, setDvalue] = useState(value);
   useEffect(() => {
     let result = setTimeout(() => {
