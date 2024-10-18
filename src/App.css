@@ -6,9 +6,11 @@ body {
   position: relative;
   height: 100%;
 }
-
+.progressBar {
+  /* background: linear-gradient(to right, red 20%, rgb(255, 255, 255) 20%); */
+}
 body {
-  background: #eee;
+
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 14px;
   color: #000;
