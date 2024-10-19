@@ -58,9 +58,9 @@
 
 // export default App;
 
-import React, { useEffect, useRef, useState } from "react";
-import TrafficLights from "./TrafficLights/TrafficLights";
-import Debouncing from "./hooks/useDebounce";
+// import React, { useEffect, useRef, useState } from "react";
+// import TrafficLights from "./TrafficLights/TrafficLights";
+// import Debouncing from "./hooks/useDebounce";
 import "./App.css";
 import ProgressBar from "./ProgressBar/ProgressBar";
 function App() {

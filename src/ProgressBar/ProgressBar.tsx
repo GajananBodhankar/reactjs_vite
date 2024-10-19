@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import  { useEffect, useRef, useState } from "react";
 function ProgressBar() {
   const [count, setCount] = useState(0);
   let ref = useRef<any>();
