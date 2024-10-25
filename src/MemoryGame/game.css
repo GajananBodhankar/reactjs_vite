@@ -1,0 +1,23 @@
+body {
+  background-color: rgb(105, 105, 105);
+  color: white;
+}
+.mainContainer {
+  display: grid;
+  width: 20rem;
+  gap: 1rem;
+  justify-items: center;
+}
+.items {
+  background-color: rgb(214, 209, 209);
+  border: 1px solid black;
+  height: auto;
+  place-items: center;
+  padding: 1rem;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100px;
+  max-width: 100px;
+}

@@ -62,11 +62,13 @@
 // import TrafficLights from "./TrafficLights/TrafficLights";
 // import Debouncing from "./hooks/useDebounce";
 import "./App.css";
+import MemoryGame from "./MemoryGame/MemoryGame";
 import ProgressBar from "./ProgressBar/ProgressBar";
 function App() {
   // return <TrafficLights />;
   // return <Debouncing />;
-  return <ProgressBar />;
+  // return <ProgressBar />;
+  return <MemoryGame />;
 }
 
 export default App;
