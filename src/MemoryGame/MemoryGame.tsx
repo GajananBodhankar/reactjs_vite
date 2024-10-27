@@ -55,7 +55,7 @@ function MemoryGame() {
                     let show = grid.filter((i: { show: any; visible: any; }) => i.show && !i.visible);
                     if (show.length) {
                       if (show[0].count == grid[j].count) {
-                        setGrid((prev) => {
+                        setGrid((prev: any) => {
                           let res = [...prev];
                           res.forEach((i) => {
                             if (i.count == show[0].count) {
