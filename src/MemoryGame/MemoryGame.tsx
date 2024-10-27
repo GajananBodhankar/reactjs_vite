@@ -52,7 +52,7 @@ function MemoryGame() {
                     return res;
                   });
                   setTimeout(() => {
-                    let show = grid.filter((i) => i.show && !i.visible);
+                    let show = grid.filter((i: { show: any; visible: any; }) => i.show && !i.visible);
                     if (show.length) {
                       if (show[0].count == grid[j].count) {
                         setGrid((prev) => {
