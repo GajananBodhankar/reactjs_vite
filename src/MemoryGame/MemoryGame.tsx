@@ -65,7 +65,7 @@ function MemoryGame() {
                           return res;
                         });
                       } else {
-                        setGrid((prev) => {
+                        setGrid((prev: any) => {
                           let res = [...prev];
                           res.forEach((i) => {
                             if (
