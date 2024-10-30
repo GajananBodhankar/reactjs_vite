@@ -1,36 +1,39 @@
-import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloProvider,
+  gql,
+  InMemoryCache,
+  useQuery,
+} from "@apollo/client";
 import React from "react";
 
+const client = new ApolloClient({
+  uri: "http://localhost:3000/graphql",
+  cache: new InMemoryCache(),
+});
 function Graphql() {
-  const client = new ApolloClient({
-    uri: "http://localhost:3000/graphql",
-    cache: new InMemoryCache(),
-  });
+  const query = gql`
+    query getData {
+      getTodo {
+        completed
+        id
+        title
+        userId
+        user {
+          id
+          name
+          username
+        }
+      }
+    }
+  `;
+  const { loading, data } = useQuery(query);
   return (
     <div>
       Graphql
       <button
         onClick={() => {
-          client
-            .query({
-              query: gql`
-                query getData {
-                  getTodo {
-                    completed
-                    id
-                    title
-                    userId
-                    user {
-                      id
-                      name
-                      username
-                    }
-                  }
-                }
-              `,
-            })
-            .then((e) => console.log(e.data))
-            .catch((e) => console.log(e));
+          console.log(data.getTodo);
         }}
       >
         Click
@@ -39,4 +42,10 @@ function Graphql() {
   );
 }
 
-export default Graphql;
+export function GraphQlWrapper() {
+  return (
+    <ApolloProvider client={client}>
+      <Graphql />
+    </ApolloProvider>
+  );
+}
