@@ -62,6 +62,7 @@
 // import TrafficLights from "./TrafficLights/TrafficLights";
 // import Debouncing from "./hooks/useDebounce";
 import "./App.css";
+import Graphql from "./Graphql/Graphql";
 import FirstRender from "./hooks/UseIsFirstRender";
 import MemoryGame from "./MemoryGame/MemoryGame";
 import ProgressBar from "./ProgressBar/ProgressBar";
@@ -70,7 +71,8 @@ function App() {
   // return <Debouncing />;
   // return <ProgressBar />;
   // return <MemoryGame />;
-  return <FirstRender />;
+  // return <FirstRender />;
+  return <Graphql />;
 }
 
 export default App;
