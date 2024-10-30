@@ -1,39 +1,21 @@
-// function sqaure(num) {
-//   console.log("Square executed");
-//   return num * num;
-// }
+const join = (a, b, c) => {
+  return `${a}_${b}_${c}`;
+};
 
-// function memo(fn) {
-//   let obj = {};
-//   return function (input) {
-//     if (obj[input]) {
-//       return obj[input];
-//     } else {
-//       obj[input] = fn(input);
-//       return obj[input];
-//     }
-//   };
-// }
-
-// let response = memo(sqaure);
-// console.log(response(10));
-// console.log(response(10));
-
-// check();
-// // Hoisting
-// function check() {
-//   console.log("hello");
-// }
-
-class A {
-  constructor(a, b) {
-    this.name = a;
-    this.age = b
-  }
-  disp() {
-    console.log(this.name, this.age)
-  }
+let _ = curry.placeholder;
+function curry(fn) {
+  return function curried(...args) {
+    if (fn.length <= args.length && !args.includes(_)) {
+      return fn(...args);
+    } else {
+      return function (...arg2) {
+        console.log(args, arg2);
+        return curried.apply(this, args.concat(arg2));
+      };
+    }
+  };
 }
+curry.placeholder = Symbol();
 
-let i = new A("gsjsnsn", 22);
-i.disp()
+let result = curry(join);
+console.log(result(_, _, _)(1)(_, 3)(2));
