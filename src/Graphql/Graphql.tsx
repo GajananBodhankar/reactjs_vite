@@ -5,7 +5,6 @@ import {
   InMemoryCache,
   useQuery,
 } from "@apollo/client";
-import React from "react";
 
 const client = new ApolloClient({
   uri: "http://localhost:3000/graphql",
