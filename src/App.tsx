@@ -61,18 +61,30 @@
 // import React, { useEffect, useRef, useState } from "react";
 // import TrafficLights from "./TrafficLights/TrafficLights";
 // import Debouncing from "./hooks/useDebounce";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import { GraphQlWrapper } from "./Graphql/Graphql";
 import FirstRender from "./hooks/UseIsFirstRender";
 import MemoryGame from "./MemoryGame/MemoryGame";
 import ProgressBar from "./ProgressBar/ProgressBar";
 function App() {
+  const [count, setCount] = useState(0);
+  const result = useRef<any>(null);
+  useEffect(() => {
+    result.current = setInterval(() => setCount((prev) => prev + 1), 100);
+    console.log(result);
+  }, []);
+  if (count == 100) {
+    clearInterval(result.current);
+  }
+  // console.log(count, result);
   // return <TrafficLights />;
   // return <Debouncing />;
   // return <ProgressBar />;
   // return <MemoryGame />;
   // return <FirstRender />;
-  return <GraphQlWrapper />;
+  // return <GraphQlWrapper />;
+  return <div>{count} </div>;
 }
 
 export default App;
