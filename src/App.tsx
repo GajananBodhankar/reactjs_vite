@@ -74,6 +74,8 @@ function App() {
     result.current = setInterval(() => setCount((prev) => prev + 1), 100);
     console.log(result);
   }, []);
+
+  
   if (count == 100) {
     clearInterval(result.current);
   }
