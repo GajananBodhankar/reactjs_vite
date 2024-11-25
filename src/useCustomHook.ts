@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-function areEqual(prev, next) {
+function areEqual(prev: string | any[], next: string | any[]) {
   if (prev.length != next.length) return false;
   for (let i = 0; i < prev.length; i++) {
     if (prev[i] != next[i]) {
@@ -15,13 +15,12 @@ interface Iobj {
   deps: [];
 }
 
-function useCustomHook(cb, deps) {
-  //   const memoref = useRef<Iobj>();
-  const [memoref, set] = useState<any>();
-  if (!memoref || !areEqual(memoref.deps, deps)) {
-    set({ value: cb(), deps });
+function useCustomHook(cb: () => any, deps: any) {
+  const memoref = useRef<Iobj>();
+  if (!memoref.current || !areEqual(memoref.current.deps, deps)) {
+    memoref.current = { value: cb, deps };
   }
-  return memoref?.value ;
+  return memoref?.current.value;
 }
 
 export default useCustomHook;
