@@ -55,6 +55,8 @@ export function useHover<T extends HTMLElement>(): [Ref<T>, boolean] {
   const [hovered, setHovered] = useState(false);
   const ref = useRef<any>();
   useEffect(() => {
+    setHovered(false);
+
     ref.current.addEventListener("mouseenter", () => {
       setHovered(true);
     });
@@ -63,13 +65,14 @@ export function useHover<T extends HTMLElement>(): [Ref<T>, boolean] {
     });
     return () => {
       ref.current.removeEventListener("mouseenter", () => {
-        setHovered(false);
+        setHovered(true);
       });
       ref.current.removeEventListener("mouseleave", () => {
         setHovered(false);
       });
     };
   }, [ref.current]);
+
   return [ref, hovered];
 }
 
