@@ -72,7 +72,6 @@ export function useHover<T extends HTMLElement>(): [Ref<T>, boolean] {
       });
     };
   }, [ref.current]);
-
   return [ref, hovered];
 }
 
