@@ -50,6 +50,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Ref, useRef } from "react";
+import useCustomEffect from "./hooks/UseEffect";
 
 export function useHover<T extends HTMLElement>(): [Ref<T>, boolean] {
   const [hovered, setHovered] = useState(false);
@@ -79,14 +80,20 @@ export function useHover<T extends HTMLElement>(): [Ref<T>, boolean] {
 // remember to export App() component like below
 
 export default function App() {
-  const [ref, isHovered] = useHover<HTMLDivElement>();
+  // const [ref, isHovered] = useHover<HTMLDivElement>();
   const [refTarget, setRefTarget] = useState<number>(0);
-  useEffect(() => {
-    console.log(ref?.current, "current");
+  // useEffect(() => {
+  //   console.log(ref?.current, "current");
+  // }, [refTarget]);
+  const firstRef = useRef<any>(true);
+  useCustomEffect(() => {
+    console.log(firstRef.current);
+    firstRef.current = false;
   }, [refTarget]);
+  // useEffect(() => console.log(firstRef.current));
   return (
     <div>
-      <p>{isHovered ? "hovered" : "not hovered"}</p>
+      {/* <p>{isHovered ? "hovered" : "not hovered"}</p> */}
       <button
         data-testid="change-ref-target-button"
         onClick={() => {
@@ -95,12 +102,12 @@ export default function App() {
       >
         toggle ref target
       </button>
-      <div ref={refTarget === 0 ? ref : null} data-testid="hover-target0">
+      {/* <div ref={refTarget === 0 ? ref : null} data-testid="hover-target0">
         target 0
       </div>
       <div ref={refTarget === 1 ? ref : null} data-testid="hover-target1">
         target 1
-      </div>
+      </div> */}
     </div>
   );
 }
