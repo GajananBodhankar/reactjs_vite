@@ -51,6 +51,7 @@
 import React, { useEffect, useState } from "react";
 import { Ref, useRef } from "react";
 import useCustomEffect from "./hooks/UseEffect";
+import useArray from "./hooks/useArray";
 
 export function useHover<T extends HTMLElement>(): [Ref<T>, boolean] {
   const [hovered, setHovered] = useState(false);
@@ -90,7 +91,8 @@ export default function App() {
     console.log(firstRef.current);
     firstRef.current = false;
   }, [refTarget]);
-  // useEffect(() => console.log(firstRef.current));
+  const [list, update] = useArray([10, 30, 40]);
+  useEffect(() => console.log(list));
   return (
     <div>
       {/* <p>{isHovered ? "hovered" : "not hovered"}</p> */}
@@ -98,6 +100,8 @@ export default function App() {
         data-testid="change-ref-target-button"
         onClick={() => {
           setRefTarget((target) => target + 1);
+          // push(refTarget);
+          update(0,5);
         }}
       >
         toggle ref target

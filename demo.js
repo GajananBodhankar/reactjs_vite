@@ -29,3 +29,5 @@ function getData(arg = check()) {
 }
 
 getData(null);
+let arr = [10, 20, 30];
+arr.push()
