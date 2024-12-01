@@ -1,0 +1,9 @@
+.mainContainer {
+  display: grid;
+  place-content: center;
+  grid-template-rows: repeat(8, 100px);
+  grid-template-columns: repeat(8, 100px);
+}
+.mainContainer > div {
+  border: 1px solid black;
+}

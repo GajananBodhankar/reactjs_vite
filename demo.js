@@ -20,14 +20,36 @@
 // let result = curry(join);
 // console.log(result(_, _, _)(1)(_, 3)(2));
 
-function check() {
-  throw new Error("Pass an argument");
+// function check() {
+//   throw new Error("Pass an argument");
+// }
+
+// function getData(arg = check()) {
+//   console.log(arg);
+// }
+
+// getData(null);
+// let arr = [10, 20, 30];
+// arr.push()
+
+function Prom1() {
+  return new Promise((res, rej) => {
+    res(10);
+  });
 }
 
-function getData(arg = check()) {
-  console.log(arg);
+function Prom2() {
+  return new Promise((res, rej) => {
+    rej(20);
+  });
 }
 
-getData(null);
-let arr = [10, 20, 30];
-arr.push()
+function all(promises) {
+  let resCount = [],
+    rejCount = false;
+  return new Promise((res, rej) => {});
+}
+
+all([Prom1(), Prom2()])
+  .then((e) => console.log(e))
+  .catch((e) => console.log(e));
