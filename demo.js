@@ -44,12 +44,31 @@ function Prom2() {
   });
 }
 
-function all(promises) {
-  let resCount = [],
-    rejCount = false;
-  return new Promise((res, rej) => {});
-}
+// function all(promises) {
+//   let resCount = [],
+//     rejCount = false;
+//   return new Promise((res, rej) => {});
+// }
 
-all([Prom1(), Prom2()])
-  .then((e) => console.log(e))
-  .catch((e) => console.log(e));
+// all([Prom1(), Prom2()])
+//   .then((e) => console.log(e))
+//   .catch((e) => console.log(e));
+
+let arr = Array.from(new Array(64).keys());
+console.log(arr);
+get(42);
+function get(num) {
+  let count = num,
+    arr = [];
+  for (let i = 0; i < 16; i++) {
+    count = count + 9;
+    if (count < 64) {
+      arr.push(count);
+      if (count >= 0) {
+        arr.push(count - num);
+      }
+    }
+  }
+  // return [];
+  console.log(arr);
+}
