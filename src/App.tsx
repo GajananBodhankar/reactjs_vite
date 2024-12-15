@@ -52,6 +52,8 @@ import React, { useEffect, useState } from "react";
 import { Ref, useRef } from "react";
 import useCustomEffect from "./hooks/UseEffect";
 import useArray from "./hooks/useArray";
+import Parent from "./ForwardRef/Parent";
+import ImperativeParent from "./useImperativeHandle/ImperativeParent";
 
 export function useHover<T extends HTMLElement>(): [Ref<T>, boolean] {
   const [hovered, setHovered] = useState(false);
@@ -96,7 +98,7 @@ export default function App() {
   return (
     <div>
       {/* <p>{isHovered ? "hovered" : "not hovered"}</p> */}
-      <button
+      {/* <button
         data-testid="change-ref-target-button"
         onClick={() => {
           setRefTarget((target) => target + 1);
@@ -105,7 +107,8 @@ export default function App() {
         }}
       >
         toggle ref target
-      </button>
+      </button> */}
+      <ImperativeParent/>
       {/* <div ref={refTarget === 0 ? ref : null} data-testid="hover-target0">
         target 0
       </div>

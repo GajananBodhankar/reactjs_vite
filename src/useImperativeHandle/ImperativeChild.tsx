@@ -5,12 +5,12 @@ function ImperativeChild(props: any, ref: React.Ref<any> | undefined) {
   useImperativeHandle(ref, () => {
     return {
       focusOrClear: () => {
-        console.log(document.activeElement);
-        if (document.activeElement === inputref.current) {
-          inputref.current?.blur();
-        } else {
-          inputref.current?.focus();
-        }
+        console.log(inputref.current);
+        // if (document.activeElement === inputref.current) {
+        //   inputref.current?.blur();
+        // } else {
+        //   inputref.current?.focus();
+        // }
       },
     };
   });
