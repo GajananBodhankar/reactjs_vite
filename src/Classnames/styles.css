@@ -1,0 +1,8 @@
+.btn-pressed {
+  background-color: green;
+  color: white;
+}
+.btn-hovered {
+  cursor: pointer;
+  box-shadow: 1px 1px 5px grey
+}
