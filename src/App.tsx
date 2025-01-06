@@ -48,7 +48,7 @@
 
 // export default App;
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Ref, useRef } from "react";
 import useCustomEffect from "./hooks/UseEffect";
 import useArray from "./hooks/useArray";
@@ -62,7 +62,6 @@ export function useHover<T extends HTMLElement>(): [Ref<T>, boolean] {
   const ref = useRef<any>();
   useEffect(() => {
     setHovered(false);
-
     ref.current.addEventListener("mouseenter", () => {
       setHovered(true);
     });
@@ -84,40 +83,43 @@ export function useHover<T extends HTMLElement>(): [Ref<T>, boolean] {
 // if you want to try your code on the right panel
 // remember to export App() component like below
 
+interface Iobj {
+  value: any;
+  deps: [];
+}
+
+function useCustomCallback(cb: () => any, deps: any) {
+  const memoref = useRef<Iobj>();
+  // if (!memoref.current || !areEqual(memoref.current.deps, deps)) {
+  //   memoref.current = { value: cb, deps };
+  // }
+  if (
+    !memoref.current ||
+    JSON.stringify(deps) !== JSON.stringify(memoref.current.deps)
+  ) {
+    memoref.current = { value: cb, deps };
+  }
+  return memoref?.current.value;
+}
+
 export default function App() {
-  // const [ref, isHovered] = useHover<HTMLDivElement>();
-  const [refTarget, setRefTarget] = useState<number>(0);
-  // useEffect(() => {
-  //   console.log(ref?.current, "current");
-  // }, [refTarget]);
-  const firstRef = useRef<any>(true);
-  useCustomEffect(() => {
-    console.log(firstRef.current);
-    firstRef.current = false;
-  }, [refTarget]);
-  const [list, update] = useArray([10, 30, 40]);
-  useEffect(() => console.log(list));
+  const [count, setCount] = useState(0);
+  const [bool, setBool] = useState(false);
+  const refer = useRef<Function>(null);
+  const handleCount = useCustomCallback(
+    () => setCount((prev) => prev + 1),
+    [count]
+  );
+  useEffect(() => {
+    console.log(refer.current === handleCount);
+    refer.current = handleCount;
+  });
   return (
     <div>
-      {/* <p>{isHovered ? "hovered" : "not hovered"}</p> */}
-      {/* <button
-        data-testid="change-ref-target-button"
-        onClick={() => {
-          setRefTarget((target) => target + 1);
-          // push(refTarget);
-          update(0,5);
-        }}
-      >
-        toggle ref target
-      </button> */}
-      {/* <ImperativeParent/> */}
-      <Page />
-      {/* <div ref={refTarget === 0 ? ref : null} data-testid="hover-target0">
-        target 0
-      </div>
-      <div ref={refTarget === 1 ? ref : null} data-testid="hover-target1">
-        target 1
-      </div> */}
+      <h2>{count}</h2>
+      <button onClick={handleCount}>Increment</button>
+      <h3>{bool ? "True" : "False"}</h3>
+      <button onClick={() => setBool(!bool)}>Change</button>
     </div>
   );
 }
