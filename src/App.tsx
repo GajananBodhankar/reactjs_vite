@@ -48,7 +48,7 @@
 
 // export default App;
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Component, useCallback, useEffect, useState } from "react";
 import { Ref, useRef } from "react";
 import useCustomEffect from "./hooks/UseEffect";
 import useArray from "./hooks/useArray";
@@ -88,38 +88,66 @@ interface Iobj {
   deps: [];
 }
 
-function useCustomCallback(cb: () => any, deps: any) {
-  const memoref = useRef<Iobj>();
-  // if (!memoref.current || !areEqual(memoref.current.deps, deps)) {
-  //   memoref.current = { value: cb, deps };
-  // }
+function useCallbackCustom(this: any, cb: () => void, args: Readonly<{}>[]) {
+  let refer = React.createRef.bind<any>(this);
   if (
-    !memoref.current ||
-    JSON.stringify(deps) !== JSON.stringify(memoref.current.deps)
+    !refer.current ||
+    JSON.stringify(args) !== JSON.stringify(refer.current?.args)
   ) {
-    memoref.current = { value: cb, deps };
+    console.log(
+      JSON.stringify(refer?.current?.args),
+      args,
+      "prev",
+      refer.current
+    );
+    refer.current = { value: cb, args };
+    console.log(
+      JSON.stringify(refer?.current?.args),
+      args,
+      "args",
+      refer.current
+    );
   }
-  return memoref?.current.value;
+  return refer?.current?.value;
 }
 
-export default function App() {
-  const [count, setCount] = useState(0);
-  const [bool, setBool] = useState(false);
-  const refer = useRef<Function>(null);
-  const handleCount = useCustomCallback(
-    () => setCount((prev) => prev + 1),
-    [count]
+export default class App extends Component {
+  constructor(props: {} | Readonly<{}>) {
+    super(props);
+    this.state = { count: 10, bool: false };
+  }
+
+  refer = React.createRef.bind<any>(this);
+
+  getData = useCallbackCustom(
+    this,
+    () => this.setState({ count: this.state?.count + 1 }),
+    [this.state?.count]
   );
-  useEffect(() => {
-    console.log(refer.current === handleCount);
-    refer.current = handleCount;
-  });
-  return (
-    <div>
-      <h2>{count}</h2>
-      <button onClick={handleCount}>Increment</button>
-      <h3>{bool ? "True" : "False"}</h3>
-      <button onClick={() => setBool(!bool)}>Change</button>
-    </div>
-  );
+  render() {
+    return (
+      <div>
+        App {this.state.bool ? "True" : "False"}
+        {this.state.count}
+        <button onClick={() => this.setState({ bool: !this.state.bool })}>
+          change
+        </button>
+        <button onClick={this.getData}>Click</button>
+      </div>
+    );
+  }
 }
+
+// function App() {
+//   const [c, s] = useState(0);
+//   const [b, sb] = useState(false);
+//   const ref = React.createRef();
+//   const update = useCallbackCustom(() => s((prev) => prev + 1), [c]);
+//   return (
+//     <div>
+//       App {c} <button onClick={update}>click</button>
+//     </div>
+//   );
+// }
+
+// export default App;
