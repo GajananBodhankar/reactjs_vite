@@ -56,6 +56,7 @@ import Parent from "./ForwardRef/Parent";
 import ImperativeParent from "./useImperativeHandle/ImperativeParent";
 import Unstable from "./unstable_batchedUpdates/Unstable";
 import Page from "./Classnames/Page";
+import { useTimeout } from "./useTimeout/useTimeout";
 
 export function useHover<T extends HTMLElement>(): [Ref<T>, boolean] {
   const [hovered, setHovered] = useState(false);
@@ -111,43 +112,13 @@ function useCallbackCustom(this: any, cb: () => void, args: Readonly<{}>[]) {
   return refer?.current?.value;
 }
 
-export default class App extends Component {
-  constructor(props: {} | Readonly<{}>) {
-    super(props);
-    this.state = { count: 10, bool: false };
-  }
-
-  refer = React.createRef.bind<any>(this);
-
-  getData = useCallbackCustom(
-    this,
-    () => this.setState({ count: this.state?.count + 1 }),
-    [this.state?.count]
-  );
-  render() {
-    return (
-      <div>
-        App {this.state.bool ? "True" : "False"}
-        {this.state.count}
-        <button onClick={() => this.setState({ bool: !this.state.bool })}>
-          change
-        </button>
-        <button onClick={this.getData}>Click</button>
-      </div>
-    );
-  }
+function App() {
+  const timer = useTimeout(()=>console.log("first"),3000);
+  console.log(timer)
+  const [count,set]=useState(0)
+  return <div>App
+    <button onClick={()=>set(10)}>click</button>
+  </div>;
 }
 
-// function App() {
-//   const [c, s] = useState(0);
-//   const [b, sb] = useState(false);
-//   const ref = React.createRef();
-//   const update = useCallbackCustom(() => s((prev) => prev + 1), [c]);
-//   return (
-//     <div>
-//       App {c} <button onClick={update}>click</button>
-//     </div>
-//   );
-// }
-
-// export default App;
+export default App;
