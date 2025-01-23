@@ -57,6 +57,7 @@ import ImperativeParent from "./useImperativeHandle/ImperativeParent";
 import Unstable from "./unstable_batchedUpdates/Unstable";
 import Page from "./Classnames/Page";
 import { useTimeout } from "./useTimeout/useTimeout";
+import usePrevious from "./hooks/usePrevious";
 
 export function useHover<T extends HTMLElement>(): [Ref<T>, boolean] {
   const [hovered, setHovered] = useState(false);
@@ -113,12 +114,21 @@ function useCallbackCustom(this: any, cb: () => void, args: Readonly<{}>[]) {
 }
 
 function App() {
-  const timer = useTimeout(()=>console.log("first"),3000);
-  console.log(timer)
-  const [count,set]=useState(0)
-  return <div>App
-    <button onClick={()=>set(10)}>click</button>
-  </div>;
+  // const timer = useTimeout(()=>console.log("first"),3000);
+  // console.log(timer)
+  // const [count,set]=useState(0)
+  // return <div>App
+  //   <button onClick={()=>set(10)}>click</button>
+  // </div>;
+  const [c, s] = useState(0);
+  const prev = usePrevious(c);
+  console.log("firstprev", prev);
+  return (
+    <div>
+      {prev}
+      <button onClick={() => s(c + 1)}>Click</button>
+    </div>
+  );
 }
 
 export default App;
