@@ -1,61 +1,39 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./style.css";
+import Cell from "./Cell";
+import { handleTimer } from "./Logic";
+
 function GridLights() {
-  const [arr, setArr] = useState([
-    ...new Array(9).keys()?.map((i) => ({ isClicked: false })),
-  ]);
+  const [arr, setArr] = useState(
+    [...new Array(9).keys()].map((_item) => ({ isClicked: false }))
+  );
   const [index, setIndex] = useState<Array<any>>([]);
   const [flag, setFlag] = useState(false);
   useEffect(() => {
-    if (flag) {
-      var timer = setTimeout(() => {
-        setArr((prev) => {
-          let result = [...prev];
-          result[index[0]].isClicked = false;
-          return result;
-        });
-        setIndex((prev) => {
-          let res = [...prev];
-          res.shift();
-          if (!res.length) {
-            setFlag(false);
-          }
-          return res;
-        });
-      }, 1000);
-    }
+    var timer: any = flag && handleTimer(index, setIndex, setArr, setFlag);
     return () => {
-      clearInterval(timer);
+      clearTimeout(timer);
     };
   }, [arr]);
   return (
     <div className="container">
       <div className="grid">
-        {arr.map((i, j) => {
-          if (j != 4) {
+        {arr.map((item, indexNum) => {
+          if (indexNum != 4) {
             return (
-              <div
-                className="items"
-                key={j}
-                style={{ backgroundColor: i.isClicked ? "green" : "white" }}
-                onClick={() => {
-                  setArr((prev) => {
-                    let result = [...prev];
-                    result[j].isClicked = true;
-                    return result;
-                  });
-                  setIndex([...index, j]);
-                  if (index.length + 2 == arr.length) {
-                    setFlag(true);
-                  }
-                }}
-              >
-                {j}
-              </div>
+              <Cell
+                key={indexNum}
+                item={item}
+                ind={indexNum}
+                index={index}
+                setArr={setArr}
+                setIndex={setIndex}
+                arr={arr}
+                setFlag={setFlag}
+              />
             );
-          } else {
-            return <div key={j}></div>;
           }
+          return <span key={indexNum}></span>;
         })}
       </div>
     </div>
