@@ -58,6 +58,7 @@ import Unstable from "./unstable_batchedUpdates/Unstable";
 import Page from "./Classnames/Page";
 import { useTimeout } from "./useTimeout/useTimeout";
 import usePrevious from "./hooks/usePrevious";
+import GridLights from "./GridLights/GridLights";
 
 export function useHover<T extends HTMLElement>(): [Ref<T>, boolean] {
   const [hovered, setHovered] = useState(false);
@@ -120,14 +121,14 @@ function App() {
   // return <div>App
   //   <button onClick={()=>set(10)}>click</button>
   // </div>;
-  const [c, s] = useState(0);
-  const prev = usePrevious(c);
-  console.log("firstprev", prev);
+  // const [c, s] = useState(0);
+  // const prev = usePrevious(c);
   return (
-    <div>
-      {prev}
-      <button onClick={() => s(c + 1)}>Click</button>
-    </div>
+    // <div>
+    //   {prev}
+    //   <button onClick={() => s(c + 1)}>Click</button>
+    // </div>
+    <GridLights />
   );
 }
 
