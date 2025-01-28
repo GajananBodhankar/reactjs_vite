@@ -43,7 +43,6 @@ function Prom2() {
     rej(20);
   });
 }
-
 // function all(promises) {
 //   let resCount = [],
 //     rejCount = false;
