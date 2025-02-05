@@ -37,7 +37,6 @@ function Prom1() {
     res(10);
   });
 }
-
 function Prom2() {
   return new Promise((res, rej) => {
     rej(20);
