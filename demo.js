@@ -72,7 +72,6 @@ function get(num) {
   console.log(arr);
 }
 
-
 class A {
   constructor() {
     this.name = "Gajanan";
