@@ -9,42 +9,52 @@
   <body>
     <div class="mainContainer" style="background-color: white"></div>
     <script>
-      let main = document.querySelector(".mainContainer");
-      let count = 0,
-        flag = true;
-      for (let i = 0; i < 8; i++) {
-        for (let j = 0; j < 8; j++) {
-          let item = document.createElement("div");
-          item.className = `item${i + j}`;
-          item.style = `background-color: ${
-            (i + j) % 2 ? "black" : "white"
-          };color:red`;
-          item.textContent = i + j ;
-          main.appendChild(item);
-          let hoveredItem = document.querySelectorAll(`.item${i + j}`);
-          hoveredItem.forEach((element, index) => {
-            let temp = element.style["background-color"];
-            element.addEventListener("mouseenter", (e) => {
-              let value = e.target.textContent;
-              console.log(value,e.target.className);
-              hoveredItem.forEach((item) => {
-                item.style = "background-color: purple";
-              });
-              e.target.style = "background-color: rgb(169, 178, 185)";
-            });
-            element.addEventListener("mouseleave", (e) => {
-              hoveredItem.forEach(
-                (item) =>
-                  (item.style = `background-color: ${
-                    (i + j) % 2 ? "black" : "white"
-                  };color:red`)
-              );
-              e.target.style = `background-color : ${temp};color:red`;
-            });
-          });
-        }
-        count += 7;
-      }
+      // document.addEventListener("click", removeevent);
+      // document.removeEventListener("click", removeevent);
+      // function removeevent(e) {
+      //   console.log("removed");
+      // }
+      const controller = new AbortController();
+      document.addEventListener("click", (e) => console.log(e), {
+        signal: controller.signal,
+      });
+      controller.abort();
+      // let main = document.querySelector(".mainContainer");
+      // let count = 0,
+      //   flag = true;
+      // for (let i = 0; i < 8; i++) {
+      //   for (let j = 0; j < 8; j++) {
+      //     let item = document.createElement("div");
+      //     item.className = `item${i + j}`;
+      //     item.style = `background-color: ${
+      //       (i + j) % 2 ? "black" : "white"
+      //     };color:red`;
+      //     item.textContent = i + j ;
+      //     main.appendChild(item);
+      //     let hoveredItem = document.querySelectorAll(`.item${i + j}`);
+      //     hoveredItem.forEach((element, index) => {
+      //       let temp = element.style["background-color"];
+      //       element.addEventListener("mouseenter", (e) => {
+      //         let value = e.target.textContent;
+      //         console.log(value,e.target.className);
+      //         hoveredItem.forEach((item) => {
+      //           item.style = "background-color: purple";
+      //         });
+      //         e.target.style = "background-color: rgb(169, 178, 185)";
+      //       });
+      //       element.addEventListener("mouseleave", (e) => {
+      //         hoveredItem.forEach(
+      //           (item) =>
+      //             (item.style = `background-color: ${
+      //               (i + j) % 2 ? "black" : "white"
+      //             };color:red`)
+      //         );
+      //         e.target.style = `background-color : ${temp};color:red`;
+      //       });
+      //     });
+      //   }
+      //   count += 7;
+      // }
     </script>
   </body>
 </html>

@@ -124,13 +124,24 @@ function App() {
   // </div>;
   // const [c, s] = useState(0);
   // const prev = usePrevious(c);
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      console.log("clicked");
+    });
+    // return () => {
+      document.removeEventListener("click", (e) => {
+        console.log("removed");
+      });
+    // };
+  }, []);
   return (
     // <div>
     //   {prev}
     //   <button onClick={() => s(c + 1)}>Click</button>
     // </div>
     // <GridLights />
-    <LifecycleThis/>
+    // <LifecycleThis/>
+    <div>Hello</div>
   );
 }
 
