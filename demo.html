@@ -9,16 +9,26 @@
   <body>
     <div class="mainContainer" style="background-color: white"></div>
     <script>
-      // document.addEventListener("click", removeevent);
-      // document.removeEventListener("click", removeevent);
-      // function removeevent(e) {
-      //   console.log("removed");
-      // }
-      const controller = new AbortController();
-      document.addEventListener("click", (e) => console.log(e), {
-        signal: controller.signal,
-      });
-      controller.abort();
+      document.addEventListener("click", remove);
+      document.removeEventListener("click", removeevent);
+      function removeevent(e) {
+        console.log("removed");
+      }
+      function remove(e) {
+        console.log("remove;odfasojdd");
+      }
+      let database;
+      
+      let request=await indexedDB.open("myDatabase", 1);
+          request.onsuccess = (event) => {
+            database = event.target.result;
+          }
+          console.log(database)
+      // const controller = new AbortController();
+      // document.addEventListener("click", (e) => console.log(e), {
+      //   signal: controller.signal,
+      // });
+      // controller.abort();
       // let main = document.querySelector(".mainContainer");
       // let count = 0,
       //   flag = true;

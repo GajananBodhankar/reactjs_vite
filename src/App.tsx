@@ -124,15 +124,26 @@ function App() {
   // </div>;
   // const [c, s] = useState(0);
   // const prev = usePrevious(c);
+
   useEffect(() => {
-    document.addEventListener("click", (e) => {
-      console.log("clicked");
+    const controller = new AbortController();
+    document.addEventListener(
+      "click",
+      (e) => {
+        console.log("clicked");
+      },
+      { signal: controller.signal }
+    );
+    document.addEventListener("click", (e) => console.log("first"), {
+      signal: controller.signal,
     });
     // return () => {
-      document.removeEventListener("click", (e) => {
-        console.log("removed");
-      });
+    // document.removeEventListener("click", (e) => {
+    //   console.log("removed");
+    // });
+
     // };
+    controller.abort();
   }, []);
   return (
     // <div>
