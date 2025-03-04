@@ -47,7 +47,6 @@
 // }
 
 // export default App;
-
 import React, { Component, useCallback, useEffect, useState } from "react";
 import { Ref, useRef } from "react";
 import useCustomEffect from "./hooks/UseEffect";
