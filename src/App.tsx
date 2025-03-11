@@ -162,6 +162,7 @@
 // export default App;
 
 import { useEffect, useRef, useState } from "react";
+import BaseComponent from "./BaseComponent";
 
 const Component = () => {
   const [sum, setSum] = useState(0);
@@ -173,6 +174,7 @@ const Component = () => {
   //   });
   // }, []);
   const ref = useRef<any>(null);
+  const [text, setText] = useState("");
   useEffect(() => {
     return () => {
       // if (ref.current == sum) {
@@ -180,23 +182,20 @@ const Component = () => {
       console.log("unmounted", ref.current, sum);
       ref.current = sum;
     };
-  },[]);
-  return (
-    <div>
-      Hello Component {sum}
-      <button onClick={() => setSum((prev) => prev + 1)}>Increment</button>{" "}
-    </div>
-  );
+  }, []);
+  return <div>Hello Component {sum}</div>;
 };
 
 function App() {
   const [sum, setSum] = useState(0);
+  const [text, setText] = useState("");
+
   return (
     <div>
       App
       {sum}
       <button onClick={() => setSum((prev) => prev + 1)}>Click</button>
-      {sum % 2 ? <Component /> : null}
+      <BaseComponent text={text} setText={setText} />
     </div>
   );
 }
