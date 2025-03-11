@@ -161,18 +161,32 @@
 
 // export default App;
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Component = () => {
   const [sum, setSum] = useState(0);
+  // useEffect(() => {
+  //   const worker = new Worker(new URL("../demo.js", import.meta.url), { type: "module" });
+  //   worker.postMessage("message");
+  //   worker.addEventListener("message", (e) => {
+  //     setSum(e.data);
+  //   });
+  // }, []);
+  const ref = useRef<any>(null);
   useEffect(() => {
-    const worker = new Worker(new URL("../demo.js", import.meta.url), { type: "module" });
-    worker.postMessage("message");
-    worker.addEventListener("message", (e) => {
-      setSum(e.data);
-    });
-  }, []);
-  return <p>Hello Component {sum}</p>;
+    return () => {
+      // if (ref.current == sum) {
+      // }
+      console.log("unmounted", ref.current, sum);
+      ref.current = sum;
+    };
+  },[]);
+  return (
+    <div>
+      Hello Component {sum}
+      <button onClick={() => setSum((prev) => prev + 1)}>Increment</button>{" "}
+    </div>
+  );
 };
 
 function App() {
@@ -182,7 +196,7 @@ function App() {
       App
       {sum}
       <button onClick={() => setSum((prev) => prev + 1)}>Click</button>
-      <Component />
+      {sum % 2 ? <Component /> : null}
     </div>
   );
 }

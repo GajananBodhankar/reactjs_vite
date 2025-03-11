@@ -85,10 +85,17 @@
 // let i = new A();
 // i.getNameFn();
 // console.log(i.getNameObj);
-onmessage = function (event) {
-  let sum = 0;
-  for (let i = 0; i < 10000000000; i++) {
-    sum += i;
-  }
-  postMessage(sum);
-};
+// onmessage = function (event) {
+//   let sum = 0;
+//   for (let i = 0; i < 10000000000; i++) {
+//     sum += i;
+//   }
+//   postMessage(sum);
+// };
+
+let prom=new Promise((res,rej)=>{
+  setTimeout(()=>res("Resolved"),10);
+  rej("rejecvt")
+})
+
+prom.then(e=>console.log(e)).catch(e=>console.log(e))
