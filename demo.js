@@ -87,13 +87,17 @@
 // console.log(i.getNameObj);
 
 /**
- * 
+ *
  */
-onmessage = function (event) {
-  let sum = 0;
-  for (let i = 0; i < 10000000000; i++) {
-    sum += i;
-  }
-  postMessage(sum);
-};
-
+// onmessage = function (event) {
+//   let sum = 0;
+//   for (let i = 0; i < 10000000000; i++) {
+//     sum += i;
+//   }
+//   postMessage(sum);
+// };
+// let val1 = { name: "gajanan" };
+// let val2 = { name: "gajanan" };
+// console.log(Object.is("hello","hello"));
+let obj = { valueOf: () => 2 };
+console.log(obj == 2, obj + 5, obj > 1);

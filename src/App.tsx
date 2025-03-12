@@ -185,11 +185,25 @@ const Component = () => {
   }, []);
   return <div>Hello Component {sum}</div>;
 };
+function useCustomEffect(cb: any, args?: Array<any>) {
+  let ref = useRef<any>(null);
+
+  if (!ref.current) {
+    cb();
+  }
+
+  if (JSON.stringify(ref.current) !== JSON.stringify(args) && ref.current) {
+    cb();
+  }
+  ref.current = args;
+}
 
 function App() {
   const [sum, setSum] = useState(0);
   const [text, setText] = useState("");
-
+  useCustomEffect(() => {
+    console.log("first");
+  });
   return (
     <div>
       App
