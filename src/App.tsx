@@ -201,14 +201,29 @@ function useCustomEffect(cb: any, args?: Array<any>) {
 function App() {
   const [sum, setSum] = useState(0);
   const [text, setText] = useState("");
-  useCustomEffect(() => {
-    console.log("first");
+  // useCustomEffect(() => {
+  //   console.log("first");
+  // });
+  const ref = useRef<any>();
+  function handleClick() {
+    console.log(ref.current);
+  }
+  useEffect(() => {
+    ref.current = sum;
   });
+  useEffect(() => {
+    let btn = document.querySelector("button");
+    btn?.addEventListener("click", handleClick);
+    setTimeout(() => {
+      alert(ref.current);
+    }, 3000);
+  }, []);
   return (
     <div>
       App
       {sum}
-      <button onClick={() => setSum((prev) => prev + 1)}>Click</button>
+      <p onClick={() => setSum((prev) => prev + 1)}>Click</p>
+      <button>Click</button>
       <BaseComponent text={text} setText={setText} />
     </div>
   );
