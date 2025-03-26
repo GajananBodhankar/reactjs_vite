@@ -161,8 +161,12 @@
 
 // export default App;
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useReducer, useRef, useState } from "react";
 import BaseComponent from "./BaseComponent";
+import Hoc from "./Hoc/Hoc";
+import ComponentOne from "./Hoc/ComponentOne";
+import ComponentTwo from "./Hoc/ComponentTwo";
+import { initialState, reducer } from "./reducer";
 
 const Component = () => {
   const [sum, setSum] = useState(0);
@@ -200,7 +204,7 @@ function useCustomEffect(cb: any, args?: Array<any>) {
 
 function App() {
   const [sum, setSum] = useState(0);
-  const [text, setText] = useState("");
+  const [text, setText] = useState({ name: "gajanan", age: 20 });
   // useCustomEffect(() => {
   //   console.log("first");
   // });
@@ -208,23 +212,32 @@ function App() {
   function handleClick() {
     console.log(ref.current);
   }
-  useEffect(() => {
-    ref.current = sum;
-  });
-  useEffect(() => {
-    let btn = document.querySelector("button");
-    btn?.addEventListener("click", handleClick);
-    setTimeout(() => {
-      alert(ref.current);
-    }, 3000);
+  // useEffect(() => {
+  //   ref.current = sum;
+  // });
+  // useEffect(() => {
+  //   let btn = document.querySelector("button");
+  //   btn?.addEventListener("click", handleClick);
+  //   setTimeout(() => {
+  //     // alert(ref.current);
+  //   }, 3000);
+  // }, []);
+
+  const One = Hoc(ComponentOne);
+  const Two = Hoc(ComponentTwo);
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const handle = useCallback(() => {
+    setText((prev) => ({ ...prev, age: prev.age + 1 }));
   }, []);
   return (
     <div>
-      App
+      <button onClick={handle}>Click</button>
+      {/* App
       {sum}
       <p onClick={() => setSum((prev) => prev + 1)}>Click</p>
       <button>Click</button>
-      <BaseComponent text={text} setText={setText} />
+      <BaseComponent text={text} setText={setText} /> */}
     </div>
   );
 }
