@@ -230,6 +230,32 @@ function App() {
   const handle = useCallback(() => {
     setText((prev) => ({ ...prev, age: prev.age + 1 }));
   }, []);
+  const [color, setColor] = useState("green");
+  useEffect(() => {
+    if (color == "green") {
+      handleColor("yellow");
+    } else if (color === "yellow") {
+      handleColor("red");
+    } else {
+      handleColor("green");
+    }
+  }, [color]);
+  function handleColor(color: any) {
+    switch (color) {
+      case "red": {
+        setTimeout(() => setColor("red"), 2000);
+        break;
+      }
+      case "yellow": {
+        setTimeout(() => setColor("yellow"), 4000);
+        break;
+      }
+      case "green": {
+        setTimeout(() => setColor("green"), 4000);
+        break;
+      }
+    }
+  }
   return (
     <div>
       <button onClick={handle}>Click</button>
@@ -238,6 +264,7 @@ function App() {
       <p onClick={() => setSum((prev) => prev + 1)}>Click</p>
       <button>Click</button>
       <BaseComponent text={text} setText={setText} /> */}
+      <div style={{ height: "100px", width: "100px", backgroundColor: `${color}` }}></div>
     </div>
   );
 }
