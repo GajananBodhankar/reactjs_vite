@@ -201,43 +201,33 @@ function useCustomEffect(cb: any, args?: Array<any>) {
   }
   ref.current = args;
 }
+const calls: Array<any> = [];
 
 export function useTimeout(callback: () => void, delay: number) {
   // your code here
   const time = useRef<number>();
   const callRef = useRef<Function>();
-  const delayRef = useRef<number>();
+  useEffect(()=>{
+    callRef.current=callback
+  },[callback])
   useEffect(() => {
-    callRef.current = callback;
-    let clearTimer = false;
-    if (delay !== delayRef.current) {
-      time.current = setTimeout(() => callRef.current(), delay);
-      delayRef.current = delay;
-      clearTimer = true;
-    }
+    time.current = setTimeout(()=>callRef.current(), delay);
     return () => {
-      if (clearTimer) {
-        clearTimeout(time.current);
-      }
+      clearTimeout(time.current);
     };
-  }, [delay, callback]);
+  }, [delay]);
 }
 export default function App() {
-  const calls: Array<any> = [];
   const callback1 = () => calls.push(["callback1", 1000]);
   const [callback, setCallback] = useState(() => callback1);
-  useTimeout(callback, 1000);
+  useTimeout(callback, 2000);
   const callback2 = () => calls.push(["callback2", 1000]);
 
-  const [timer, setTimer] = useState(0);
   useEffect(() => {
-    setTimeout(() => setCallback(() => callback2), 700);
+    setTimeout(() => {
+      setCallback(() => callback2);
+    }, 0);
     setTimeout(() => console.log(calls), 3000);
   }, []);
-  return (
-    <div>
-      {calls[0]}
-      <button onClick={() => setTimer(3000)}>Click</button>
-    </div>
-  );
+  return <div>{calls[0]}</div>;
 }
