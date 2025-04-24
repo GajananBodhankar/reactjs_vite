@@ -202,71 +202,42 @@ function useCustomEffect(cb: any, args?: Array<any>) {
   ref.current = args;
 }
 
-function App() {
-  const [sum, setSum] = useState(0);
-  const [text, setText] = useState({ name: "gajanan", age: 20 });
-  // useCustomEffect(() => {
-  //   console.log("first");
-  // });
-  const ref = useRef<any>();
-  function handleClick() {
-    console.log(ref.current);
-  }
-  // useEffect(() => {
-  //   ref.current = sum;
-  // });
-  // useEffect(() => {
-  //   let btn = document.querySelector("button");
-  //   btn?.addEventListener("click", handleClick);
-  //   setTimeout(() => {
-  //     // alert(ref.current);
-  //   }, 3000);
-  // }, []);
-
-  const One = Hoc(ComponentOne);
-  const Two = Hoc(ComponentTwo);
-
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const handle = useCallback(() => {
-    setText((prev) => ({ ...prev, age: prev.age + 1 }));
-  }, []);
-  const [color, setColor] = useState("green");
+export function useTimeout(callback: () => void, delay: number) {
+  // your code here
+  const time = useRef<number>();
+  const callRef = useRef<Function>();
+  const delayRef = useRef<number>();
   useEffect(() => {
-    if (color == "green") {
-      handleColor("yellow");
-    } else if (color === "yellow") {
-      handleColor("red");
-    } else {
-      handleColor("green");
+    callRef.current = callback;
+    let clearTimer = false;
+    if (delay !== delayRef.current) {
+      time.current = setTimeout(() => callRef.current(), delay);
+      delayRef.current = delay;
+      clearTimer = true;
     }
-  }, [color]);
-  function handleColor(color: any) {
-    switch (color) {
-      case "red": {
-        setTimeout(() => setColor("red"), 2000);
-        break;
+    return () => {
+      if (clearTimer) {
+        clearTimeout(time.current);
       }
-      case "yellow": {
-        setTimeout(() => setColor("yellow"), 4000);
-        break;
-      }
-      case "green": {
-        setTimeout(() => setColor("green"), 4000);
-        break;
-      }
-    }
-  }
+    };
+  }, [delay, callback]);
+}
+export default function App() {
+  const calls: Array<any> = [];
+  const callback1 = () => calls.push(["callback1", 1000]);
+  const [callback, setCallback] = useState(() => callback1);
+  useTimeout(callback, 1000);
+  const callback2 = () => calls.push(["callback2", 1000]);
+
+  const [timer, setTimer] = useState(0);
+  useEffect(() => {
+    setTimeout(() => setCallback(() => callback2), 700);
+    setTimeout(() => console.log(calls), 3000);
+  }, []);
   return (
     <div>
-      <button onClick={handle}>Click</button>
-      {/* App
-      {sum}
-      <p onClick={() => setSum((prev) => prev + 1)}>Click</p>
-      <button>Click</button>
-      <BaseComponent text={text} setText={setText} /> */}
-      <div style={{ height: "100px", width: "100px", backgroundColor: `${color}` }}></div>
+      {calls[0]}
+      <button onClick={() => setTimer(3000)}>Click</button>
     </div>
   );
 }
-
-export default App;
