@@ -204,14 +204,13 @@ function useCustomEffect(cb: any, args?: Array<any>) {
 const calls: Array<any> = [];
 
 export function useTimeout(callback: () => void, delay: number) {
-  // your code here
   const time = useRef<number>();
-  const callRef = useRef<Function>();
-  useEffect(()=>{
-    callRef.current=callback
-  },[callback])
+  const callRef = useRef<Function>(callback);
   useEffect(() => {
-    time.current = setTimeout(()=>callRef.current(), delay);
+    callRef.current = callback;
+  }, [callback]);
+  useEffect(() => {
+    time.current = setTimeout(() => callRef.current(), delay);
     return () => {
       clearTimeout(time.current);
     };
@@ -219,9 +218,9 @@ export function useTimeout(callback: () => void, delay: number) {
 }
 export default function App() {
   const callback1 = () => calls.push(["callback1", 1000]);
+  const callback2 = () => calls.push(["callback2", 1000]);
   const [callback, setCallback] = useState(() => callback1);
   useTimeout(callback, 2000);
-  const callback2 = () => calls.push(["callback2", 1000]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -229,5 +228,5 @@ export default function App() {
     }, 0);
     setTimeout(() => console.log(calls), 3000);
   }, []);
-  return <div>{calls[0]}</div>;
+  return <div>App</div>;
 }
