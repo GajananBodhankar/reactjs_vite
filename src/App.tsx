@@ -201,32 +201,54 @@ function useCustomEffect(cb: any, args?: Array<any>) {
   }
   ref.current = args;
 }
-const calls: Array<any> = [];
 
 export function useTimeout(callback: () => void, delay: number) {
   const time = useRef<number>();
   const callRef = useRef<Function>(callback);
+
   useEffect(() => {
     callRef.current = callback;
   }, [callback]);
+
   useEffect(() => {
     time.current = setTimeout(() => callRef.current(), delay);
     return () => {
       clearTimeout(time.current);
     };
   }, [delay]);
+  function reset() {
+    clear();
+    time.current = setTimeout(() => callRef.current(), delay);
+  }
+  function clear() {
+    if (time.current) {
+      clearTimeout(time.current);
+    }
+  }
+  return { reset, clear };
 }
+
+const calls: Array<any> = [];
+
 export default function App() {
   const callback1 = () => calls.push(["callback1", 1000]);
   const callback2 = () => calls.push(["callback2", 1000]);
   const [callback, setCallback] = useState(() => callback1);
-  useTimeout(callback, 2000);
+
+  const { clear, reset } = useTimeout(callback, 2000);
 
   useEffect(() => {
     setTimeout(() => {
       setCallback(() => callback2);
-    }, 0);
+    }, 1000);
     setTimeout(() => console.log(calls), 3000);
   }, []);
-  return <div>App</div>;
+
+  return (
+    <div>
+      App
+      <button onClick={reset}>Click</button>
+      <button onClick={clear}>Clear</button>
+    </div>
+  );
 }
