@@ -237,13 +237,18 @@ export default function App() {
 
   const { clear, reset } = useTimeout(callback, 2000);
 
+  const worker = new Worker(new URL("./Worker/worker.ts", import.meta.url));
   useEffect(() => {
+    worker.postMessage("hello");
+    worker.onmessage = function (e) {
+      console.log(e);
+    };
+    console.log(worker);
     setTimeout(() => {
       setCallback(() => callback2);
     }, 1000);
     setTimeout(() => console.log(calls), 3000);
   }, []);
-
   return (
     <div>
       App
