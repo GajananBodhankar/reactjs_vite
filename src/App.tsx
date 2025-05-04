@@ -1,3 +1,4 @@
+import "./App.css";
 // // import React, {
 // //   useState,
 // //   useCallback,
@@ -167,6 +168,7 @@ import Hoc from "./Hoc/Hoc";
 import ComponentOne from "./Hoc/ComponentOne";
 import ComponentTwo from "./Hoc/ComponentTwo";
 import { initialState, reducer } from "./reducer";
+import Popover from "./Popover/Popover";
 
 const Component = () => {
   const [sum, setSum] = useState(0);
@@ -249,13 +251,14 @@ export default function App() {
     }, 1000);
     setTimeout(() => console.log(calls), 3000);
     // let nameDiv = document.getElementById("nameDiv");
-    nameDiv?.addEventListener("click", () => console.log("first", count));
   }, []);
   return (
     <div id="nameDiv">
-      App
-      <button onClick={() => set(count + 1)}>Click</button>
-      {/* <button onClick={clear}>Clear</button> */}
+      <Popover>
+        <Popover.Action>Click me</Popover.Action>
+        <Popover.Content>I am content</Popover.Content>
+      </Popover>
+      <p style={{ backgroundColor: "red", margin: 0 }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, ipsum!</p>
     </div>
   );
 }
