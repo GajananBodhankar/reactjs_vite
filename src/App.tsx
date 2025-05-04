@@ -236,7 +236,7 @@ export default function App() {
   const [callback, setCallback] = useState(() => callback1);
 
   const { clear, reset } = useTimeout(callback, 2000);
-
+  const [count, set] = useState(0);
   const worker = new Worker(new URL("./Worker/worker.ts", import.meta.url));
   useEffect(() => {
     worker.postMessage("hello");
@@ -248,12 +248,14 @@ export default function App() {
       setCallback(() => callback2);
     }, 1000);
     setTimeout(() => console.log(calls), 3000);
+    // let nameDiv = document.getElementById("nameDiv");
+    nameDiv?.addEventListener("click", () => console.log("first", count));
   }, []);
   return (
-    <div>
+    <div id="nameDiv">
       App
-      <button onClick={reset}>Click</button>
-      <button onClick={clear}>Clear</button>
+      <button onClick={() => set(count + 1)}>Click</button>
+      {/* <button onClick={clear}>Clear</button> */}
     </div>
   );
 }
