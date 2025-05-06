@@ -20,7 +20,6 @@ function Action({ children }: iPopover) {
     console.log(e.target?.getBoundingClientRect())
   }}>{children}</button>;
 }
-
 function Content({ children }: iPopover) {
   const { isOpen } = useContext(PopoverContext);
   return <div className={isOpen ? "content" : "content hidden"}>{children}</div>;
