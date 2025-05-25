@@ -1,7 +1,6 @@
 @import "tailwindcss";
 span.Resizer.vertical {
   width: 20px;
-  
   cursor: row-resize;
   background-color: white;
 }
