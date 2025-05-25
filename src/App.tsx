@@ -1,3 +1,4 @@
+"use client";
 import "./App.css";
 // // import React, {
 // //   useState,
@@ -162,7 +163,7 @@ import "./App.css";
 
 // export default App;
 
-import { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import { use, useCallback, useEffect, useReducer, useRef, useState } from "react";
 import BaseComponent from "./BaseComponent";
 import Hoc from "./Hoc/Hoc";
 import ComponentOne from "./Hoc/ComponentOne";
@@ -232,33 +233,74 @@ export function useTimeout(callback: () => void, delay: number) {
 
 const calls: Array<any> = [];
 
-export default function App() {
-  const callback1 = () => calls.push(["callback1", 1000]);
-  const callback2 = () => calls.push(["callback2", 1000]);
-  const [callback, setCallback] = useState(() => callback1);
+import React from "react";
+import axios from "axios";
 
-  const { clear, reset } = useTimeout(callback, 2000);
-  const [count, set] = useState(0);
-  const worker = new Worker(new URL("./Worker/worker.ts", import.meta.url));
-  useEffect(() => {
-    worker.postMessage("hello");
-    worker.onmessage = function (e) {
-      console.log(e);
-    };
-    console.log(worker);
-    setTimeout(() => {
-      setCallback(() => callback2);
-    }, 1000);
-    setTimeout(() => console.log(calls), 3000);
-    // let nameDiv = document.getElementById("nameDiv");
-  }, []);
+// function App() {
+//   const [data, setData] = useState("");
+//   useEffect(() => {
+//     (async () => {
+//       const result = await fetch("http://localhost:3000/read");
+//       console.log(result.body);
+//       let chunk = "";
+//       let text = new TextDecoder();
+//       for await (let i of result?.body) {
+//         chunk += "";
+//         console.log(text.decode(i));
+//       }
+//     })();
+//   }, []);
+//   return <div>App {data}</div>;
+// }
+
+// export default App;
+async function get() {
+  try {
+    let data = await axios.get("https://jsonplaceholder.typicode.com/todos");
+    return data.data;
+  } catch (error) {}
+}
+// export default function App(props) {
+//   const ref = useRef<any>(null);
+//   document.addEventListener("click",e=>console.log(e.target===ref.current))
+//   return (
+//     <div
+//       className="container"
+//       style={{
+//         width: "100px",
+//         height: "100px",
+//         backgroundColor: "red",
+//       }}
+//     ></div>
+//   );
+// }
+
+function App() {
+  const [n, s] = useState(0);
+  function get() {
+    console.log(r.current);
+  }
+  useEffect(()=>{
+          setTimeout(get, 3000);
+
+  },[])
+const r=useRef<any>(n)
+useEffect(()=>{
+  r.current=n
+})
   return (
-    <div id="nameDiv">
-      <Popover>
-        <Popover.Action>Click me</Popover.Action>
-        <Popover.Content>I am content</Popover.Content>
-      </Popover>
-      <p style={{ backgroundColor: "red", margin: 0 }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, ipsum!</p>
+    <div>
+      App
+      {n}
+      <p
+        onClick={() => {
+        }}
+      >
+        Click
+      </p>
+      <p onClick={() => s(n + 5)}>clicdfsada</p>
     </div>
   );
 }
+
+export default App;
