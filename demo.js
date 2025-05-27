@@ -99,19 +99,19 @@
 // let val1 = { name: "gajanan" };
 // let val2 = { name: "gajanan" };
 // console.log(Object.is("hello","hello"));
+//============================================================================================================
+// const obj = {
+//   a: [10, 20, 30],
+// };
+// const obj2 = { a: [10, 20, 30] };
 
-const obj = {
-  a: [10, 20, 30],
-};
-const obj2 = { a: [10, 20, 30] };
+// function deepEqual(obj1, obj2) {
+//   if (obj1 === obj2) {
+//     return true;
+//   }
+//   let key1 = Object.keys(obj1),
+//     key2 = Object.keys(obj2);
+//   return key1.every((key) => deepEqual(obj1[key], obj2[key]));
+// }
 
-function deepEqual(obj1, obj2) {
-  if (obj1 === obj2) {
-    return true;
-  }
-  let key1 = Object.keys(obj1),
-    key2 = Object.keys(obj2);
-  return key1.every((key) => deepEqual(obj1[key], obj2[key]));
-}
-
-console.log(deepEqual(obj, obj2));
+// console.log(deepEqual(obj, obj2));
