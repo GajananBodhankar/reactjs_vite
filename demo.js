@@ -115,3 +115,44 @@
 // }
 
 // console.log(deepEqual(obj, obj2));
+
+//==============================================================================================================================
+
+function chunkArray(arr, n) {
+  // Your implementation
+  if (!arr) {
+    return [];
+  }
+  if (n > arr.length) {
+    return arr;
+  }
+  const result = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (i == 0) {
+      result.push([arr[i]]);
+    } else if (i % n) {
+      result[result.length - 1] = [...result[result.length - 1], arr[i]];
+    } else {
+      result.push([arr[i]]);
+    }
+  }
+  return arr.length == 0 ? arr : result;
+}
+
+console.log(chunkArray());
+function removeDuplicates(arr) {
+  // your code here
+  const obj = {},
+    result = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (!obj[arr[i]]) {
+      result.push(arr[i]);
+    }
+console.log(obj, arr[i].toString(), arr[i])
+    obj[arr[i]] = true;
+  }
+  return result;
+}
+// console.log(removeDuplicates([1, "1", 1]));
+console.log(removeDuplicates([{},{},[]]));
+
