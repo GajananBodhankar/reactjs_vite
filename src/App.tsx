@@ -235,6 +235,8 @@ const calls: Array<any> = [];
 
 import React from "react";
 import axios from "axios";
+import Form from "./zod/ZodFormComponent";
+import ZodFormComponent from "./zod/ZodFormComponent";
 
 // function App() {
 //   const [data, setData] = useState("");
@@ -280,26 +282,22 @@ function App() {
   function get() {
     console.log(r.current);
   }
-  useEffect(()=>{
-          setTimeout(get, 3000);
-
-  },[])
-const r=useRef<any>(n)
-useEffect(()=>{
-  r.current=n
-})
+  useEffect(() => {
+    setTimeout(get, 3000);
+  }, []);
+  const r = useRef<any>(n);
+  useEffect(() => {
+    r.current = n;
+    console.log("Parent rendered");
+  });
+  const [c, set] = useState(0);
+  const [count, setCount] = useState(0);
   return (
-    <div>
-      App
-      {n}
-      <p
-        onClick={() => {
-        }}
-      >
-        Click
-      </p>
-      <p onClick={() => s(n + 5)}>clicdfsada</p>
-    </div>
+    <>
+      <ZodFormComponent  />
+      <p>{count}</p>
+      <button onClick={() => setCount((prev) => prev + 1)}>Click</button>
+    </>
   );
 }
 
