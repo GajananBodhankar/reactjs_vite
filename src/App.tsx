@@ -277,27 +277,62 @@ async function get() {
 //   );
 // }
 
+{/* <ZodFormComponent  />
+<p>{count}</p>
+<button onClick={() => setCount((prev) => prev + 1)}>Click</button> */}
+{/* <p className="text-3xl">Component update with state</p>
+<input
+  type="text"
+  value={name}
+  onFocus={() => setIsSubmitted(false)}
+  onChange={(e) => setName(e.target.value)}
+  className="w-max border-[1px] p-2 text-xl"
+  placeholder="Enter name"
+/>
+<button className="bg-blue-500 w-max text-white p-2" onClick={() => setIsSubmitted(true)}>
+  Submit
+</button>
+{isSubmitted && <p>The name is {name}</p>} */}
+// const [n, s] = useState(0);
+// function get() {
+//   const [isSubmitted, setIsSubmitted] = useState(false);
+//   console.log(r.current);
+// }
+// useEffect(() => {
+//   setTimeout(get, 3000);
+// }, []);
+// const r = useRef<any>(n);
+// useEffect(() => {
+//   r.current = n;
+//   console.log("Parent rendered");
+// });
 function App() {
-  const [n, s] = useState(0);
-  function get() {
-    console.log(r.current);
-  }
+  const [name, setName] = useState("");
   useEffect(() => {
-    setTimeout(get, 3000);
-  }, []);
-  const r = useRef<any>(n);
-  useEffect(() => {
-    r.current = n;
-    console.log("Parent rendered");
+    console.log("re-rendered");
   });
-  const [c, set] = useState(0);
-  const [count, setCount] = useState(0);
+  const ref = useRef<any>("");
   return (
-    <>
-      <ZodFormComponent  />
-      <p>{count}</p>
-      <button onClick={() => setCount((prev) => prev + 1)}>Click</button>
-    </>
+    <div className="container mx-auto pt-3 flex flex-col space-y-2">
+      <p className="text-3xl">Component update with state</p>
+      <input
+        type="text"
+        onChange={(e) => {
+          ref.current = e.target.value;
+        }}
+        className="w-max border-[1px] p-2 text-xl"
+        placeholder="Enter name"
+      />
+      <button
+        className="bg-blue-500 w-max text-white p-2"
+        onClick={() => {
+          setName(ref.current);
+        }}
+      >
+        Submit
+      </button>
+      {ref.current && <p>The name is {name}</p>}
+    </div>
   );
 }
 
