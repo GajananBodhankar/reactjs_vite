@@ -237,6 +237,7 @@ import React from "react";
 import axios from "axios";
 import Form from "./zod/ZodFormComponent";
 import ZodFormComponent from "./zod/ZodFormComponent";
+import NestedCheckbox from "./NestedCheckbox/NestedCheckbox";
 
 // function App() {
 //   const [data, setData] = useState("");
@@ -313,26 +314,27 @@ function App() {
   });
   const ref = useRef<any>("");
   return (
-    <div className="container mx-auto pt-3 flex flex-col space-y-2">
-      <p className="text-3xl">Component update with state</p>
-      <input
-        type="text"
-        onChange={(e) => {
-          ref.current = e.target.value;
-        }}
-        className="w-max border-[1px] p-2 text-xl"
-        placeholder="Enter name"
-      />
-      <button
-        className="bg-blue-500 w-max text-white p-2"
-        onClick={() => {
-          setName(ref.current);
-        }}
-      >
-        Submit
-      </button>
-      {ref.current && <p>The name is {name}</p>}
-    </div>
+    // <div className="container mx-auto pt-3 flex flex-col space-y-2">
+    //   <p className="text-3xl">Component update with state</p>
+    //   <input
+    //     type="text"
+    //     onChange={(e) => {
+    //       ref.current = e.target.value;
+    //     }}
+    //     className="w-max border-[1px] p-2 text-xl"
+    //     placeholder="Enter name"
+    //   />
+    //   <button
+    //     className="bg-blue-500 w-max text-white p-2"
+    //     onClick={() => {
+    //       setName(ref.current);
+    //     }}
+    //   >
+    //     Submit
+    //   </button>
+    //   {ref.current && <p>The name is {name}</p>}
+    // </div>
+    <NestedCheckbox/>
   );
 }
 

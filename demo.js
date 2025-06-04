@@ -118,41 +118,84 @@
 
 //==============================================================================================================================
 
-function chunkArray(arr, n) {
-  // Your implementation
-  if (!arr) {
-    return [];
-  }
-  if (n > arr.length) {
-    return arr;
-  }
-  const result = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (i == 0) {
-      result.push([arr[i]]);
-    } else if (i % n) {
-      result[result.length - 1] = [...result[result.length - 1], arr[i]];
+// function chunkArray(arr, n) {
+//   // Your implementation
+//   if (!arr) {
+//     return [];
+//   }
+//   if (n > arr.length) {
+//     return arr;
+//   }
+//   const result = [];
+//   for (let i = 0; i < arr.length; i++) {
+//     if (i == 0) {
+//       result.push([arr[i]]);
+//     } else if (i % n) {
+//       result[result.length - 1] = [...result[result.length - 1], arr[i]];
+//     } else {
+//       result.push([arr[i]]);
+//     }
+//   }
+//   return arr.length == 0 ? arr : result;
+// }
+
+// console.log(chunkArray());
+
+// function removeDuplicates(arr) {
+//   // your code here
+//   const obj = new Map(),
+//   result = [];
+//   for (let i = 0; i < arr.length; i++) {
+//     if (!obj.has(arr[i])) {
+//       result.push(arr[i]);
+//     }
+
+//     obj.set(arr[i], true);
+//   }
+//   return result;
+// }
+// // console.log(removeDuplicates([1, "1", 1]));
+// console.log(removeDuplicates([{}, {}, []]));
+
+//==============================================================================================================================
+
+const CheckboxesData = [
+  {
+    id: 1,
+    label: "Fruits",
+    children: [
+      { id: 2, label: "Apple" },
+      { id: 3, label: "Banana" },
+      {
+        id: 4,
+        label: "Citrus",
+        children: [
+          { id: 5, label: "Orange" },
+          { id: 6, label: "Lemon" },
+        ],
+      },
+    ],
+  },
+  {
+    id: 7,
+    label: "Vegetables",
+    children: [
+      { id: 8, label: "Carrot" },
+      { id: 9, label: "Broccoli" },
+    ],
+  },
+];
+
+function getData(data) {
+  for (let i = 0; i < data.length; i++) {
+    if (data[i]?.children) {
+      data[i].checked=false
+      getData(data[i].children);
     } else {
-      result.push([arr[i]]);
+      data[i].checked = false;
     }
   }
-  return arr.length == 0 ? arr : result;
+  return data;
 }
 
-console.log(chunkArray());
-
-function removeDuplicates(arr) {
-  // your code here
-  const obj = new Map(),
-  result = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (!obj.has(arr[i])) {
-      result.push(arr[i]);
-    }
-
-    obj.set(arr[i], true);
-  }
-  return result;
-}
-// console.log(removeDuplicates([1, "1", 1]));
-console.log(removeDuplicates([{}, {}, []]));
+console.log(getData(CheckboxesData));
