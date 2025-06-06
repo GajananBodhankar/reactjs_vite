@@ -238,3 +238,37 @@ const arr = [
 //   }
 //   return region;
 // }
+/**
+ * Own solution
+ * @param {*} arr
+ * @returns
+ */
+function get(arr) {
+  let m = new Map(),
+    p = arr.length,
+    q = arr[0].length,
+    count = 0;
+  for (let i = 0; i < p; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      if (arr[i][j] == 1 && check(arr, i, j, m)) {
+        count++;
+      }
+    }
+  }
+  return count;
+}
+
+function check(arr, i, j, m) {
+  if (i < 0 || j < 0 || i >= arr.length || j >= arr[0].length || arr[i][j] == 0 || m.has(`${i}-${j}`)) {
+    return false;
+  }
+  m.set(`${i}-${j}`, true);
+  check(arr, i - 1, j, m);
+  check(arr, i + 1, j, m);
+  check(arr, i, j - 1, m);
+  check(arr, i, j + 1, m);
+  return true;
+}
+
+get(arr);
+console.log(get(arr));
