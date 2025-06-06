@@ -159,43 +159,82 @@
 
 //==============================================================================================================================
 
-const CheckboxesData = [
-  {
-    id: 1,
-    label: "Fruits",
-    children: [
-      { id: 2, label: "Apple" },
-      { id: 3, label: "Banana" },
-      {
-        id: 4,
-        label: "Citrus",
-        children: [
-          { id: 5, label: "Orange" },
-          { id: 6, label: "Lemon" },
-        ],
-      },
-    ],
-  },
-  {
-    id: 7,
-    label: "Vegetables",
-    children: [
-      { id: 8, label: "Carrot" },
-      { id: 9, label: "Broccoli" },
-    ],
-  },
+// const CheckboxesData = [
+//   {
+//     id: 1,
+//     label: "Fruits",
+//     children: [
+//       { id: 2, label: "Apple" },
+//       { id: 3, label: "Banana" },
+//       {
+//         id: 4,
+//         label: "Citrus",
+//         children: [
+//           { id: 5, label: "Orange" },
+//           { id: 6, label: "Lemon" },
+//         ],
+//       },
+//     ],
+//   },
+//   {
+//     id: 7,
+//     label: "Vegetables",
+//     children: [
+//       { id: 8, label: "Carrot" },
+//       { id: 9, label: "Broccoli" },
+//     ],
+//   },
+// ];
+
+// function getData(data) {
+//   for (let i = 0; i < data.length; i++) {
+//     if (data[i]?.children) {
+//       data[i].checked=false
+//       getData(data[i].children);
+//     } else {
+//       data[i].checked = false;
+//     }
+//   }
+//   return data;
+// }
+
+// console.log(getData(CheckboxesData));
+
+//==============================================================================================================================
+
+const arr = [
+  [1, 1, 1],
+  [0, 0, 0],
+  [1, 1, 1],
 ];
 
-function getData(data) {
-  for (let i = 0; i < data.length; i++) {
-    if (data[i]?.children) {
-      data[i].checked=false
-      getData(data[i].children);
-    } else {
-      data[i].checked = false;
-    }
-  }
-  return data;
-}
-
-console.log(getData(CheckboxesData));
+/**
+ * chat gpt solution
+ * @param {*} arr
+ * @returns count
+ */
+// function get(arr) {
+//   let region = 0,
+//     map = new Map();
+//   const n = arr.length,
+//     m = arr[0].length;
+//   for (let i = 0; i < n; i++) {
+//     for (let j = 0; j < m; j++) {
+//       if (arr[i][j] == 1 && !map.has(`${i}-${j}`)) {
+//         check(i, j);
+//         region++;
+//       }
+//     }
+//   }
+//   function check(i, j) {
+//     if (i < 0 || j < 0 || i >= n || j >= m || arr[i][j] == 0 || map.has(`${i}-${j}`)) {
+//       return;
+//     }
+//     map.set(`${i}-${j}`, true);
+//     check(i, j - 1);
+//     check(i, j + 1);
+//     check(i - 1, j);
+//     check(i + 1, j);
+//   }
+//   return region;
+// }
