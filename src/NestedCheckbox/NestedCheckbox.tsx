@@ -57,11 +57,9 @@ const Checkboxes = ({ data, checked, setChecked }: { data: Array<any>; checked: 
                             return data[i];
                           }
                           if (data[i]?.children) {
-                            const result: any = getParent(data[i].children, item);
-                            if (result) {
-                              const isTrue = data[i].children.every((element: { id: string | number }) => newState[element.id]);
-                              newState[data[i].id] = isTrue ? true : false;
-                            }
+                            getParent(data[i].children, item);
+                            const isTrue = data[i].children.every((element: { id: string | number }) => newState[element.id]);
+                            newState[data[i].id] = isTrue ? true : false;
                           }
                         }
                       }

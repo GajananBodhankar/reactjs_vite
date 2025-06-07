@@ -237,6 +237,7 @@ import axios from "axios";
 import Form from "./zod/ZodFormComponent";
 import ZodFormComponent from "./zod/ZodFormComponent";
 import NestedCheckbox from "./NestedCheckbox/NestedCheckbox";
+import Main from "./ProductStore/Main";
 
 // function App() {
 //   const [data, setData] = useState("");
@@ -277,10 +278,13 @@ async function get() {
 //   );
 // }
 
-{/* <ZodFormComponent  />
+{
+  /* <ZodFormComponent  />
 <p>{count}</p>
-<button onClick={() => setCount((prev) => prev + 1)}>Click</button> */}
-{/* <p className="text-3xl">Component update with state</p>
+<button onClick={() => setCount((prev) => prev + 1)}>Click</button> */
+}
+{
+  /* <p className="text-3xl">Component update with state</p>
 <input
   type="text"
   value={name}
@@ -292,7 +296,8 @@ async function get() {
 <button className="bg-blue-500 w-max text-white p-2" onClick={() => setIsSubmitted(true)}>
   Submit
 </button>
-{isSubmitted && <p>The name is {name}</p>} */}
+{isSubmitted && <p>The name is {name}</p>} */
+}
 // const [n, s] = useState(0);
 // function get() {
 //   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -312,6 +317,23 @@ function App() {
     console.log("re-rendered");
   });
   const ref = useRef<any>("");
+  const [data, setData] = useState("");
+  useEffect(() => {
+    (async function () {
+      // const data = await fetch("http://localhost:3000/read", { method: "get" });
+      // const result: any = data.body;
+      // for await (let i of result) {
+      //   setData((prev) => prev + new TextDecoder().decode(i));
+      // }
+      const req = new XMLHttpRequest();
+      req.open("GET", "https://jsonplaceholder.typicode.com/todos", false);
+      req.send();
+      req.onloadend = function (e) {
+        // console.log(req.response);
+      };
+      // console.log("first",req.response)
+    })();
+  });
   return (
     // <div className="container mx-auto pt-3 flex flex-col space-y-2">
     //   <p className="text-3xl">Component update with state</p>
@@ -333,7 +355,11 @@ function App() {
     //   </button>
     //   {ref.current && <p>The name is {name}</p>}
     // </div>
-    <NestedCheckbox/>
+    <>
+      {/* <p>{data}</p>
+      <NestedCheckbox /> */}
+      <Main/>
+    </>
   );
 }
 
