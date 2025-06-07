@@ -27,18 +27,7 @@ const CheckboxesData = [
   },
 ];
 
-const setAllChecked = (data, checked) => {
-  if (Array.isArray(data)) {
-    data.map((i) => setAllChecked(i, checked));
-  }
-  return {
-    ...data,
-    checked,
-    children: data.children ? data.children.map((c) => setAllChecked(c, checked)) : undefined,
-  };
-};
-const Checkboxes = ({ data, setData }: { data: Array<any>; setData: (value: any) => void }) => {
-  useEffect(() => console.log(data));
+const Checkboxes = ({ data, checked, setChecked }: { data: Array<any>; checked: any; setChecked: (value: any) => void }) => {
   return (
     <div>
       {data.map((i, j) => {
@@ -48,30 +37,45 @@ const Checkboxes = ({ data, setData }: { data: Array<any>; setData: (value: any)
               <dd>
                 <input
                   type="checkbox"
-                  checked={i.checked}
+                  checked={checked[i.id] || false}
                   name=""
                   id={`${i.label}-${j}`}
                   onChange={(e) => {
-                    if (i.children) {
-                      setData((prev: any) => {
-                        let result = [];
-                        for (let j = 0; j < prev.length; j++) {
-                          if (prev[j].label == i.label) {
-                            result.push(setAllChecked(prev[j], e.target.checked));
-                          } else {
-                            result.push(prev[j]);
+                    setChecked((prev: any) => {
+                      const newState = { ...prev, [i.id]: e.target.checked };
+                      const updateChild = (child: Array<any>) => {
+                        child.forEach((ele) => {
+                          newState[ele.id] = e.target.checked;
+                          if (ele.children) {
+                            updateChild(ele.children);
+                          }
+                        });
+                      };
+                      function getParent(data: string | any[], item: any) {
+                        for (let i = 0; i < data.length; i++) {
+                          if (data[i].id == item) {
+                            return data[i];
+                          }
+                          if (data[i]?.children) {
+                            const result: any = getParent(data[i].children, item);
+                            if (result) {
+                              const isTrue = data[i].children.every((element: { id: string | number }) => newState[element.id]);
+                              newState[data[i].id] = isTrue ? true : false;
+                            }
                           }
                         }
-                        return result;
-                      });
-                    }
+                      }
+                      i.children && updateChild(i.children);
+                      getParent(CheckboxesData, i.id);
+                      return newState;
+                    });
                   }}
                 />
                 <label htmlFor={`${i.label}-${j}`}>
-                  {i.label} {JSON.stringify(i.checked)}
+                  {i.label} {checked[i.id] ? "true" : "false"}
                 </label>
               </dd>
-              <dt>{i.children && <Checkboxes data={i.children} key={`${i.label}-${j}`} setData={setData} />}</dt>
+              <dt>{i.children && <Checkboxes data={i.children} key={`${i.label}-${j}`} checked={checked} setChecked={setChecked} />}</dt>
             </dl>
           </div>
         );
@@ -79,26 +83,14 @@ const Checkboxes = ({ data, setData }: { data: Array<any>; setData: (value: any)
     </div>
   );
 };
-function getData(data: string | any[]) {
-  for (let i = 0; i < data.length; i++) {
-    if (data[i]?.children) {
-      data[i].checked = false;
-
-      getData(data[i].children);
-    } else {
-      data[i].checked = false;
-    }
-  }
-  return data;
-}
 
 export default function NestedCheckbox() {
-  const [data, setData] = useState<any>(getData(CheckboxesData));
+  const [data, setData] = useState<any>({});
 
   return (
     <div>
       <h2>Nested Checkbox</h2>
-      <Checkboxes data={data} setData={setData} />
+      <Checkboxes data={CheckboxesData} checked={data} setChecked={setData} />
     </div>
   );
 }

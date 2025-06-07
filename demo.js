@@ -159,32 +159,32 @@
 
 //==============================================================================================================================
 
-// const CheckboxesData = [
-//   {
-//     id: 1,
-//     label: "Fruits",
-//     children: [
-//       { id: 2, label: "Apple" },
-//       { id: 3, label: "Banana" },
-//       {
-//         id: 4,
-//         label: "Citrus",
-//         children: [
-//           { id: 5, label: "Orange" },
-//           { id: 6, label: "Lemon" },
-//         ],
-//       },
-//     ],
-//   },
-//   {
-//     id: 7,
-//     label: "Vegetables",
-//     children: [
-//       { id: 8, label: "Carrot" },
-//       { id: 9, label: "Broccoli" },
-//     ],
-//   },
-// ];
+const CheckboxesData = [
+  {
+    id: 1,
+    label: "Fruits",
+    children: [
+      { id: 2, label: "Apple" },
+      { id: 3, label: "Banana" },
+      {
+        id: 4,
+        label: "Citrus",
+        children: [
+          { id: 5, label: "Orange" },
+          { id: 6, label: "Lemon" },
+        ],
+      },
+    ],
+  },
+  {
+    id: 7,
+    label: "Vegetables",
+    children: [
+      { id: 8, label: "Carrot" },
+      { id: 9, label: "Broccoli" },
+    ],
+  },
+];
 
 // function getData(data) {
 //   for (let i = 0; i < data.length; i++) {
@@ -197,8 +197,26 @@
 //   }
 //   return data;
 // }
+const das = { [5]: true, [6]: true };
+function getParent(data, item) {
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].id == item) {
+      return data[i];
+    }
+    if (data[i]?.children) {
+      const result = getParent(data[i].children, item);
+      if (result) console.log(data[i]);
+      // const check = data[i].children.every((ele) => {
+      //   return das[`${ele.id}`];
+      // });
+      // if (check) {
+      // console.log(data[i]);
+      // }
+    }
+  }
+}
 
-// console.log(getData(CheckboxesData));
+console.log(getParent(CheckboxesData, 9));
 
 //==============================================================================================================================
 
@@ -277,39 +295,41 @@ const arr = [
 
 // const str = "zza";
 // const str = "bdda";
-// const str = "bac";
-const str = "bydizfve";
-var robotWithString = function (s) {
-  let p = [],
-    t = [],
-    minChar = [];
-  for (let i = 0; i < s.length; i++) {
-    minChar.push(min(str, i));
-  }
-  console.log(minChar);
-  for (let i = 0; i < s.length; i++) {
-    t.push(s[i]);
-    const min = i+1<s.length? minChar[i+1]: s[i];
-    while (t.at(-1) && t.at(-1) <= min) {
-      p.push(t.pop());
-    }
-  }
-  while (t.length) {
-    p.push(t.pop());
-  }
-  return p;
-};
+// // const str = "bac";
+// const str = "bydizfve";
+// var robotWithString = function (s) {
+//   let p = [],
+//     t = [],
+//     minChar = [];
+//   for (let i = 0; i < s.length; i++) {
+//     minChar.push(min(str, i));
+//   }
+//   console.log(minChar);
+//   for (let i = 0; i < s.length; i++) {
+//     t.push(s[i]);
+//     const min = i+1<s.length? minChar[i+1]: s[i];
+//     while (t.at(-1) && t.at(-1) <= min) {
+//       p.push(t.pop());
+//     }
+//   }
+//   while (t.length) {
+//     p.push(t.pop());
+//   }
+//   return p;
+// };
 
-function min(str, index) {
-  let item = "";
-  for (let i = index; i < str.length; i++) {
-    if (!item) {
-      item = str[i];
-    } else if (str[i] < item) {
-      item = str[i];
-    }
-  }
-  return item;
-}
+// function min(str, index) {
+//   let item = "";
+//   for (let i = index; i < str.length; i++) {
+//     if (!item) {
+//       item = str[i];
+//     } else if (str[i] < item) {
+//       item = str[i];
+//     }
+//   }
+//   return item;
+// }
 
-console.log(robotWithString(str));
+// console.log(robotWithString(str));
+
+//==============================================================================================================================
