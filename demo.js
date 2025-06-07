@@ -243,32 +243,73 @@ const arr = [
  * @param {*} arr
  * @returns
  */
-function get(arr) {
-  let m = new Map(),
-    p = arr.length,
-    q = arr[0].length,
-    count = 0;
-  for (let i = 0; i < p; i++) {
-    for (let j = 0; j < arr[i].length; j++) {
-      if (arr[i][j] == 1 && check(arr, i, j, m)) {
-        count++;
-      }
+// function get(arr) {
+//   let m = new Map(),
+//     p = arr.length,
+//     q = arr[0].length,
+//     count = 0;
+//   for (let i = 0; i < p; i++) {
+//     for (let j = 0; j < arr[i].length; j++) {
+//       if (arr[i][j] == 1 && check(arr, i, j, m)) {
+//         count++;
+//       }
+//     }
+//   }
+//   return count;
+// }
+
+// function check(arr, i, j, m) {
+//   if (i < 0 || j < 0 || i >= arr.length || j >= arr[0].length || arr[i][j] == 0 || m.has(`${i}-${j}`)) {
+//     return false;
+//   }
+//   m.set(`${i}-${j}`, true);
+//   check(arr, i - 1, j, m);
+//   check(arr, i + 1, j, m);
+//   check(arr, i, j - 1, m);
+//   check(arr, i, j + 1, m);
+//   return true;
+// }
+
+// get(arr);
+// console.log(get(arr));
+
+//==============================================================================================================================
+
+// const str = "zza";
+// const str = "bdda";
+// const str = "bac";
+const str = "bydizfve";
+var robotWithString = function (s) {
+  let p = [],
+    t = [],
+    minChar = [];
+  for (let i = 0; i < s.length; i++) {
+    minChar.push(min(str, i));
+  }
+  console.log(minChar);
+  for (let i = 0; i < s.length; i++) {
+    t.push(s[i]);
+    const min = i+1<s.length? minChar[i+1]: s[i];
+    while (t.at(-1) && t.at(-1) <= min) {
+      p.push(t.pop());
     }
   }
-  return count;
-}
-
-function check(arr, i, j, m) {
-  if (i < 0 || j < 0 || i >= arr.length || j >= arr[0].length || arr[i][j] == 0 || m.has(`${i}-${j}`)) {
-    return false;
+  while (t.length) {
+    p.push(t.pop());
   }
-  m.set(`${i}-${j}`, true);
-  check(arr, i - 1, j, m);
-  check(arr, i + 1, j, m);
-  check(arr, i, j - 1, m);
-  check(arr, i, j + 1, m);
-  return true;
+  return p;
+};
+
+function min(str, index) {
+  let item = "";
+  for (let i = index; i < str.length; i++) {
+    if (!item) {
+      item = str[i];
+    } else if (str[i] < item) {
+      item = str[i];
+    }
+  }
+  return item;
 }
 
-get(arr);
-console.log(get(arr));
+console.log(robotWithString(str));
