@@ -320,20 +320,21 @@ function App() {
   const [data, setData] = useState("");
   useEffect(() => {
     (async function () {
-      // const data = await fetch("http://localhost:3000/read", { method: "get" });
-      // const result: any = data.body;
-      // for await (let i of result) {
-      //   setData((prev) => prev + new TextDecoder().decode(i));
-      // }
-      const req = new XMLHttpRequest();
-      req.open("GET", "https://jsonplaceholder.typicode.com/todos", false);
-      req.send();
-      req.onloadend = function (e) {
-        // console.log(req.response);
-      };
-      // console.log("first",req.response)
+      const data = await fetch("http://localhost:3000/read", { method: "get" });
+      const result: any = data.body;
+      console.log( result)
+      for await (let i of result) {
+        console.log(i)
+        setData((prev) => prev + new TextDecoder().decode(i));
+      }
     })();
-  });
+  },[]);
+  // const req = new XMLHttpRequest();
+  // req.open("GET", "http://localhost:3000/read");
+  // req.send();
+  // req.onloadend = function () {
+  //   console.log(req.response, "lorem");
+  // };
   return (
     // <div className="container mx-auto pt-3 flex flex-col space-y-2">
     //   <p className="text-3xl">Component update with state</p>
@@ -358,7 +359,8 @@ function App() {
     <>
       {/* <p>{data}</p>
       <NestedCheckbox /> */}
-      <Main/>
+      {/* <Main /> */}
+      {data}
     </>
   );
 }
