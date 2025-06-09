@@ -238,6 +238,7 @@ import Form from "./zod/ZodFormComponent";
 import ZodFormComponent from "./zod/ZodFormComponent";
 import NestedCheckbox from "./NestedCheckbox/NestedCheckbox";
 import Main from "./ProductStore/Main";
+import DataTable from "./DataTable/DataTable";
 
 // function App() {
 //   const [data, setData] = useState("");
@@ -317,18 +318,9 @@ function App() {
     console.log("re-rendered");
   });
   const ref = useRef<any>("");
-  const [data, setData] = useState("");
+ 
   useEffect(() => {
-    (async function () {
-      const data = await fetch("http://localhost:3000/read", { method: "get" });
-      const result: any = data.body;
-      console.log( result)
-      for await (let i of result) {
-        console.log(i)
-        setData((prev) => prev + new TextDecoder().decode(i));
-      }
-    })();
-  },[]);
+  }, []);
   // const req = new XMLHttpRequest();
   // req.open("GET", "http://localhost:3000/read");
   // req.send();
@@ -360,7 +352,28 @@ function App() {
       {/* <p>{data}</p>
       <NestedCheckbox /> */}
       {/* <Main /> */}
-      {data}
+      <input
+        type="text"
+        className="w-[100%] border-2"
+        onChange={(e) => {
+          if (ref.current) {
+            ref?.current?.abort();
+          }
+          const signal = new AbortController();
+          ref.current = signal;
+          (async function () {
+            const data = await axios.request({
+              url: `http://localhost:3000/data?name=${e.target.value}`,
+              method: "POST",
+              signal: signal.signal,
+            });
+            console.log(data.data);
+          })();
+        }}
+        name=""
+        id=""
+      />
+      <DataTable/>
     </>
   );
 }
