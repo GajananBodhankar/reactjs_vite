@@ -373,7 +373,6 @@ function App() {
         name=""
         id=""
       />
-      <DataTable/>
     </>
   );
 }
