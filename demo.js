@@ -331,39 +331,3 @@ const arr = [
 // }
 
 // console.log(robotWithString(str));
-
-//==============================================================================================================================
-
-function getData(...args) {
-  console.log(args, " interval executed");
-}
-window.intervalIdTracker = 1000;
-window.intervals = {};
-window.setInterval = function (cb, time, ...args) {
-  const intervalId = window.intervalIdTracker++;
-
-  const timetoCall = Date.now() + time;
-
-  function execute() {
-    cb(...args);
-    window.intervals[intervalId].time += time;
-  }
-  window.intervals[intervalId] = { cb: execute, time: timetoCall, args };
-
-  processInterval();
-  return intervalId;
-};
-
-function processInterval() {
-  function executeIntervals(key) {
-    const timer = window.intervals[key];
-    if (Date.now() >= timer.time) {
-      timer.cb();
-    } else {
-      requestIdleCallback(processInterval);
-    }
-  }
-  Object.keys(window.intervals).forEach(executeIntervals);
-}
-window.clearInterval = function () {};
-setInterval(getData, 1000, 20, 30);
