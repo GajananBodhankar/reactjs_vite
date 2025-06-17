@@ -330,5 +330,36 @@ const arr = [
 //   return item;
 // }
 
-
 // console.log(robotWithString(str));
+
+class SingleTon {
+  constructor() {
+    
+  }
+  static getInstance() {
+    return new SingleTon();
+  }
+}
+
+console.log(SingleTon.getInstance());
+
+
+// const obj={
+//   name:"gajanan", 
+//   show: function(){
+//     return ()=>console.log(this?.name)
+//   }
+// }
+
+// let res = obj.show.call({name:"max"});
+// let data=res()
+
+function one(){
+  this.name="maxfdsfds";
+  this.show = function(){
+    setTimeout(()=>console.log(this.name))
+  }
+}
+let i=new one();
+i.show.call({name:'john'})
+
