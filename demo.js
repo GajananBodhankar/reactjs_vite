@@ -333,9 +333,7 @@ const arr = [
 // console.log(robotWithString(str));
 
 class SingleTon {
-  constructor() {
-    
-  }
+  constructor() {}
   static getInstance() {
     return new SingleTon();
   }
@@ -343,23 +341,25 @@ class SingleTon {
 
 console.log(SingleTon.getInstance());
 
+const obj = {
+  name: "gajanan",
+  show: function () {
+    return () => console.log(this?.name);
+  },
+};
 
-// const obj={
-//   name:"gajanan", 
-//   show: function(){
-//     return ()=>console.log(this?.name)
-//   }
-// }
+let res = obj.show;
+let data = res()();
 
-// let res = obj.show.call({name:"max"});
-// let data=res()
-
-function one(){
-  this.name="maxfdsfds";
-  this.show = function(){
-    setTimeout(()=>console.log(this.name))
+function One(){
+  let a=10;
+  function two(){
+    console.log("first")
   }
+  function three(){
+    console.log("first")
+  }
+  return three
 }
-let i=new one();
-i.show.call({name:'john'})
-
+let x= One();
+console.dir(x)
