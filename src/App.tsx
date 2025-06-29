@@ -318,15 +318,18 @@ function App() {
     console.log("re-rendered");
   });
   const ref = useRef<any>("");
- 
-  useEffect(() => {
-  }, []);
+
   // const req = new XMLHttpRequest();
   // req.open("GET", "http://localhost:3000/read");
   // req.send();
   // req.onloadend = function () {
   //   console.log(req.response, "lorem");
   // };
+  const [count, setCount] = useState(0);
+
+  if (count == 1) {
+    throw new Error("Error");
+  }
   return (
     // <div className="container mx-auto pt-3 flex flex-col space-y-2">
     //   <p className="text-3xl">Component update with state</p>
@@ -373,8 +376,43 @@ function App() {
         name=""
         id=""
       />
+      <p>{count}</p>
+      <button
+        onClick={() => {
+          setCount((prev) => prev + 1);
+        }}
+      >
+        Click
+      </button>
     </>
   );
 }
 
-export default App;
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {}
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>Something went wrong.</h1>;
+    }
+
+    return this.props.children;
+  }
+}
+
+const WrappedApp = () => (
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>
+);
+
+export default WrappedApp;
