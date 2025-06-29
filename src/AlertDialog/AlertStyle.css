@@ -1,0 +1,12 @@
+.openTransition {
+  animation: open 0.2s ease-in-out;
+}
+
+@keyframes open {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

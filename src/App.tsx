@@ -239,6 +239,7 @@ import ZodFormComponent from "./zod/ZodFormComponent";
 import NestedCheckbox from "./NestedCheckbox/NestedCheckbox";
 import Main from "./ProductStore/Main";
 import DataTable from "./DataTable/DataTable";
+import AlertComponent from "./AlertDialog/AlertComponent";
 
 // function App() {
 //   const [data, setData] = useState("");
@@ -315,7 +316,6 @@ async function get() {
 function App() {
   const [name, setName] = useState("");
   useEffect(() => {
-    console.log("re-rendered");
   });
   const ref = useRef<any>("");
 
@@ -330,6 +330,7 @@ function App() {
   if (count == 1) {
     throw new Error("Error");
   }
+  console.log(count);
   return (
     // <div className="container mx-auto pt-3 flex flex-col space-y-2">
     //   <p className="text-3xl">Component update with state</p>
@@ -351,40 +352,22 @@ function App() {
     //   </button>
     //   {ref.current && <p>The name is {name}</p>}
     // </div>
-    <>
-      {/* <p>{data}</p>
-      <NestedCheckbox /> */}
-      {/* <Main /> */}
-      <input
-        type="text"
-        className="w-[100%] border-2"
-        onChange={(e) => {
-          if (ref.current) {
-            ref?.current?.abort();
-          }
-          const signal = new AbortController();
-          ref.current = signal;
-          (async function () {
-            const data = await axios.request({
-              url: `http://localhost:3000/data?name=${e.target.value}`,
-              method: "POST",
-              signal: signal.signal,
-            });
-            console.log(data.data);
-          })();
-        }}
-        name=""
-        id=""
-      />
-      <p>{count}</p>
-      <button
-        onClick={() => {
-          setCount((prev) => prev + 1);
-        }}
-      >
-        Click
-      </button>
-    </>
+    <div style={{height:"200vh"}}>
+
+    <AlertComponent>
+      <AlertComponent.Trigger>
+        <button className="bg-amber-300 mt-1.5">Click</button>
+      </AlertComponent.Trigger>
+      <AlertComponent.Content>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur 
+        </p>
+        <AlertComponent.Cancel>
+          <button className="bg-amber-300">Cancel</button>
+        </AlertComponent.Cancel>
+      </AlertComponent.Content>
+    </AlertComponent>
+    </div>
   );
 }
 
@@ -415,4 +398,4 @@ const WrappedApp = () => (
   </ErrorBoundary>
 );
 
-export default WrappedApp;
+export default App;
