@@ -330,7 +330,6 @@ function App() {
   if (count == 1) {
     throw new Error("Error");
   }
-  console.log(count);
   return (
     // <div className="container mx-auto pt-3 flex flex-col space-y-2">
     //   <p className="text-3xl">Component update with state</p>
