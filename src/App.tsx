@@ -394,7 +394,7 @@ class ErrorBoundary extends React.Component<{},{hasError: boolean}> {
 
   // Used to log the error information
   componentDidCatch(error: any, info: any) {
-    console.log(error, "dmasldmjl", info);
+    console.log(error, "the error is ", info);
   }
 
   render() {
