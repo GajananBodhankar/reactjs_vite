@@ -381,19 +381,19 @@ function App() {
   );
 }
 
-class ErrorBoundary extends React.Component {
-  constructor(props) {
+class ErrorBoundary extends React.Component<{},{hasError: boolean}> {
+  constructor(props: {}) {
     super(props);
     this.state = { hasError: false };
   }
 
   // used to render the fallback UI once the error is thrown
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: any) {
     return { hasError: true };
   }
 
   // Used to log the error information
-  componentDidCatch(error, info) {
+  componentDidCatch(error: any, info: any) {
     console.log(error, "dmasldmjl", info);
   }
 
