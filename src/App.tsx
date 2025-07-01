@@ -315,8 +315,7 @@ async function get() {
 // });
 function App() {
   const [name, setName] = useState("");
-  useEffect(() => {
-  });
+  useEffect(() => {});
   const ref = useRef<any>("");
 
   // const req = new XMLHttpRequest();
@@ -352,22 +351,34 @@ function App() {
     //   </button>
     //   {ref.current && <p>The name is {name}</p>}
     // </div>
-    <div style={{height:"200vh"}}>
-
-    <AlertComponent>
-      <AlertComponent.Trigger>
-        <button className="bg-amber-300 mt-1.5">Click</button>
-      </AlertComponent.Trigger>
-      <AlertComponent.Content>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur 
-        </p>
-        <AlertComponent.Cancel>
-          <button className="bg-amber-300">Cancel</button>
-        </AlertComponent.Cancel>
-      </AlertComponent.Content>
-    </AlertComponent>
+    <div>
+      {count}
+      <button
+        onClick={() => {
+          setCount((prev) => prev + 1);
+          if (count == 1) {
+            throw new Error("Error");
+          }
+        }}
+      >
+        Click
+      </button>
     </div>
+    // <div style={{height:"200vh"}}>
+    // <AlertComponent>
+    //   <AlertComponent.Trigger>
+    //     <button className="bg-amber-300 mt-1.5">Click</button>
+    //   </AlertComponent.Trigger>
+    //   <AlertComponent.Content>
+    //     <p>
+    //       Lorem ipsum dolor sit, amet consectetur
+    //     </p>
+    //     <AlertComponent.Cancel>
+    //       <button className="bg-amber-300">Cancel</button>
+    //     </AlertComponent.Cancel>
+    //   </AlertComponent.Content>
+    // </AlertComponent>
+    // </div>
   );
 }
 
@@ -377,11 +388,15 @@ class ErrorBoundary extends React.Component {
     this.state = { hasError: false };
   }
 
+  // used to render the fallback UI once the error is thrown
   static getDerivedStateFromError(error) {
     return { hasError: true };
   }
 
-  componentDidCatch(error, info) {}
+  // Used to log the error information
+  componentDidCatch(error, info) {
+    console.log(error, "dmasldmjl", info);
+  }
 
   render() {
     if (this.state.hasError) {
@@ -398,4 +413,4 @@ const WrappedApp = () => (
   </ErrorBoundary>
 );
 
-export default App;
+export default WrappedApp;
