@@ -332,6 +332,7 @@ const arr = [
 
 // console.log(robotWithString(str));
 
+// ======··============================================================
 class SingleTon {
   constructor() {}
   static getInstance() {
