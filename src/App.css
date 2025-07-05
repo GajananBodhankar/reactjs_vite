@@ -1,6 +1,10 @@
 #root {
   height: 100%;
 }
+*{
+  background-color: rgb(71, 71, 71);
+  color: white
+}
 html,
 body {
   position: relative;

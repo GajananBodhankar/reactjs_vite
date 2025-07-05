@@ -7,7 +7,7 @@
 // //   useMemo,
 // // } from "react";
 // // import useCustomHook from "./useCustomHook";
-
+import "./App.css"
 // // function App() {
 // //   const [count, setCount] = useState(0);
 // //   const [bool, setBool] = useState(false);
@@ -240,6 +240,7 @@ import NestedCheckbox from "./NestedCheckbox/NestedCheckbox";
 import Main from "./ProductStore/Main";
 import DataTable from "./DataTable/DataTable";
 import AlertComponent from "./AlertDialog/AlertComponent";
+import DraggableStickyNotes from "./DraggableStickyNotes/DraggableStickyNotes";
 
 // function App() {
 //   const [data, setData] = useState("");
@@ -350,19 +351,20 @@ function App() {
     //   </button>
     //   {ref.current && <p>The name is {name}</p>}
     // </div>
-    <div>
-      {count}
-      <button
-        onClick={() => {
-          setCount((prev) => prev + 1);
-          if (count == 1) {
-            throw new Error("Error");
-          }
-        }}
-      >
-        Click to increment
-      </button>
-    </div>
+    // <div>
+    //   {count}
+    //   <button
+    //     onClick={() => {
+    //       setCount((prev) => prev + 1);
+    //       if (count == 1) {
+    //         throw new Error("Error");
+    //       }
+    //     }}
+    //   >
+    //     Click to increment
+    //   </button>
+    // </div>
+    <DraggableStickyNotes/>
     // <div style={{height:"200vh"}}>
     // <AlertComponent>
     //   <AlertComponent.Trigger>
