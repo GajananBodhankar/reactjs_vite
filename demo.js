@@ -352,15 +352,16 @@ const obj = {
 let res = obj.show;
 let data = res()();
 
-function One(){
-  let a=10;
-  function two(){
-    console.log("first")
+function One() {
+  let a = 10;
+  function two() {
+    console.log("first");
   }
-  function three(){
-    console.log("first")
+  function three() {
+    console.log("first");
   }
-  return three
+  return three;
 }
-let x= One();
-console.dir(x)
+let x = One();
+console.dir(x);
+
