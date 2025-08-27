@@ -2,20 +2,25 @@
 // //   return `${a}_${b}_${c}`;
 // // };
 
-// // let _ = curry.placeholder;
-// // function curry(fn) {
-// //   return function curried(...args) {
-// //     if (fn.length <= args.length && !args.includes(_)) {
-// //       return fn(...args);
-// //     } else {
-// //       return function (...arg2) {
-// //         console.log(args, arg2);
-// //         return curried.apply(this, args.concat(arg2));
-// //       };
-// //     }
-// //   };
-// // }
-// // curry.placeholder = Symbol();
+function curry(fn) {
+  return function curried(...args) {
+    // if number of arguments match
+    if (
+      args.length >= fn.length &&
+      args.slice(0, fn.length).every((item) => item !== curry.placeholder)
+    ) {
+      return fn.call(this, ...args)
+    }
+    // otherwise return a function which merges the args
+    return function (...nextArgs) {
+      const mappedArgsTo = args.map((item) =>
+        item === curry.placeholder && nextArgs.length ? nextArgs.shift() : item
+      )
+      return curried.call(this, ...mappedArgsTo, ...nextArgs)
+    }
+  }
+}
+curry.placeholder = Symbol()
 
 // // let result = curry(join);
 // // console.log(result(_, _, _)(1)(_, 3)(2));
