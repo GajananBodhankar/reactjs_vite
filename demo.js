@@ -4,22 +4,19 @@
 function curry(fn) {
   return function curried(...args) {
     // if number of arguments match
-    if (
-      args.length >= fn.length &&
-      args.slice(0, fn.length).every((item) => item !== curry.placeholder)
-    ) {
-      return fn.call(this, ...args)
+    if (args.length >= fn.length && args.slice(0, fn.length).every((item) => item !== curry.placeholder)) {
+      return fn.call(this, ...args);
     }
     // otherwise return a function which merges the args
     return function (...nextArgs) {
       const mappedArgsTo = args.map((item) =>
         item === curry.placeholder && nextArgs.length ? nextArgs.shift() : item
-      )
-      return curried.call(this, ...mappedArgsTo, ...nextArgs)
-    }
-  }
+      );
+      return curried.call(this, ...mappedArgsTo, ...nextArgs);
+    };
+  };
 }
-curry.placeholder = Symbol()
+curry.placeholder = Symbol();
 
 // // let result = curry(join);
 // // console.log(result(_, _, _)(1)(_, 3)(2));
@@ -356,7 +353,6 @@ const obj = {
 let res = obj.show;
 let data = res()();
 
-debugger
 function One() {
   let a = 10;
   function two() {
@@ -371,5 +367,11 @@ let x = One();
 console.dir(x);
 //===============================================
 
-debugger
-var mod=10
+var mod = 10;
+let object={name:"Gajanan"}
+
+let gc =new WeakRef(object);
+
+let fr = new FinalizationRegistry((value) => console.log(`${value} has been cleared`));
+fr.register(object,JSON.stringify(object))
+object=null
