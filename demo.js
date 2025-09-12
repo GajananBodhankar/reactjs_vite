@@ -356,6 +356,7 @@ const obj = {
 let res = obj.show;
 let data = res()();
 
+debugger
 function One() {
   let a = 10;
   function two() {
@@ -370,3 +371,5 @@ let x = One();
 console.dir(x);
 //===============================================
 
+debugger
+var mod=10
