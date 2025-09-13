@@ -88,3 +88,19 @@ function allSettled(promises) {
   return Promise.all(prom);
 }
 
+
+class A{
+  constructor(){
+    this.name=10
+  }
+  disp=()=>{
+    console.log(this.name, "hello")
+  }
+}
+class B extends A{
+  constructor(){
+    super().disp()
+  }
+}
+let i =new B()
+

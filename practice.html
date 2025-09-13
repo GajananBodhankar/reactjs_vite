@@ -7,36 +7,53 @@
     <link rel="stylesheet" href="practice.css" />
   </head>
   <body>
+    <span style="background-color: red;">hello</span>
     <div class="container">
       <div class="absolute"></div>
       <p>Hello I am gajanan</p>
     </div>
+    <!-- <div class="grid">
+      <div class="items" style="grid-area: a;">10</div>
+      <div class="items" style="grid-area: a;"></div>
+      <div class="items" style="grid-area: a;"></div>
+      <div class="items"style="grid-area: b;"></div>
+      <div class="items" style="grid-area: b;"></div>
+      <div class="items"style="grid-area: b;"></div>
+      <div class="items"style="grid-area: c;"></div>
+      <div class="items"style="grid-area: c;"></div>
+      <div class="items"style="grid-area: c;"></div>
+      <div class="items"style="grid-area: d;"></div>
+    </div> -->
     <div class="grid">
-      <div class="items" >10</div>
-      <div class="items" ></div>
-      <div class="items" ></div>
-      <div class="items"></div>
-      <div class="items" ></div>
-      <div class="items"></div>
-      <div class="items"></div>
-      <div class="items"></div>
-      <div class="items"></div>
-      <div class="items"></div>
+      <div class="items1">1</div>
+      <div class="items2">2</div>
+      <div class="items3">3</div>
+      <div class="items4">4</div>
+      <div class="items5">5</div>
+      <div class="items6">6</div>
+      <div class="items7">7</div>
     </div>
     <script type="module">
-      let container = document.getElementsByClassName("container")[0];
-      let p = document.createElement("p");
-      let abs = document.getElementsByClassName("absolute")[0];
-      p.textContent = `${container.scrollHeight} ${window.innerHeight} ${container.clientHeight}`;
-      container.append(p);
-      document.addEventListener("scroll", (e) => {
-        if (window.scrollY >= (container.scrollHeight * 5) / 100) {
-          abs.setAttribute("style", "background-color: blue;");
-        } else {
-          abs.setAttribute("style", "background-color: red");
-        }
-        console.log(`${container.scrollHeight} ${window.innerHeight} ${container.clientHeight}`, abs);
-      });
+      // let container = document.getElementsByClassName("container")[0];
+      // let p = document.createElement("p");
+      // let abs = document.getElementsByClassName("absolute")[0];
+      // p.textContent = `${container.scrollHeight} ${window.innerHeight} ${container.clientHeight}`;
+      // container.append(p);
+      // document.addEventListener("scroll", (e) => {
+      //   if (window.scrollY >= (container.scrollHeight * 5) / 100) {
+      //     abs.setAttribute("style", "background-color: blue;");
+      //   } else {
+      //     abs.setAttribute("style", "background-color: red");
+      //   }
+      //   console.log(`${container.scrollHeight} ${window.innerHeight} ${container.clientHeight}`, abs);
+      // });
+      let grid = document.getElementsByClassName("grid")[0];
+      grid.onclick = function () {
+        console.log("first");
+      };
+      grid.onclick = function () {
+        console.log("second");
+      };
     </script>
   </body>
 </html>
