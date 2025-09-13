@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <script type="module" src="./pratice.js"></script>
-</body>
+    <link rel="stylesheet" href="practice.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="absolute"></div>
+      <p>Hello I am gajanan</p>
+    </div>
+    <div class="grid">
+      <div class="items" >10</div>
+      <div class="items" ></div>
+      <div class="items" ></div>
+      <div class="items"></div>
+      <div class="items" ></div>
+      <div class="items"></div>
+      <div class="items"></div>
+      <div class="items"></div>
+      <div class="items"></div>
+      <div class="items"></div>
+    </div>
+    <script type="module">
+      let container = document.getElementsByClassName("container")[0];
+      let p = document.createElement("p");
+      let abs = document.getElementsByClassName("absolute")[0];
+      p.textContent = `${container.scrollHeight} ${window.innerHeight} ${container.clientHeight}`;
+      container.append(p);
+      document.addEventListener("scroll", (e) => {
+        if (window.scrollY >= (container.scrollHeight * 5) / 100) {
+          abs.setAttribute("style", "background-color: blue;");
+        } else {
+          abs.setAttribute("style", "background-color: red");
+        }
+        console.log(`${container.scrollHeight} ${window.innerHeight} ${container.clientHeight}`, abs);
+      });
+    </script>
+  </body>
 </html>
