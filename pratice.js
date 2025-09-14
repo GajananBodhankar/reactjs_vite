@@ -88,9 +88,21 @@ function allSettled(promises) {
   return Promise.all(prom);
 }
 
-function getData(a, b){
+var name = "sachin";
 
+function get() {
+  name();
+  name = "max";
+  return 10;
+  function name() {
+    console.log("first");
+  }
 }
+console.log(name);
+get();
 
-console.log(getData.length)
-
+const expense = {
+  a: [10, 20],
+  b: [2, 4],
+  c: [5],
+};
