@@ -367,35 +367,37 @@ let x = One();
 console.dir(x);
 //===============================================
 
-var mod = 10;
-let object = { name: "Gajanan" };
+// var mod = 10;
+// let object = { name: "Gajanan" };
 
-let gc = new WeakRef(object);
+// let gc = new WeakRef(object);
 
-let fr = new FinalizationRegistry((value) => console.log(`${value} has been cleared`));
-fr.register(object, JSON.stringify(object));
-object = null;
+// let fr = new FinalizationRegistry((value) => console.log(`${value} has been cleared`));
+// fr.register(object, JSON.stringify(object));
+// object = null;
 
-function first() {
-  this.name = "Gajanan";
-}
+// function first() {
+//   this.name = "Gajanan";
+// }
 
-function second() {
-  console.log(this.name);
-}
+// function second() {
+//   console.log(this.name);
+// }
 
-second.prototype = new first();
-let s = new second();
+// second.prototype = new first();
+// let s = new second();
 
-function getData(a, b, c) {
-  return {
-    name: a,
-    address: b,
-    age: c,
-    yob,
-  };
-}
-function yob() {
-  return new Date().getFullYear()-this.age;
-}
-console.log(getData("gajanan", "Nanded", 24).yob== getData("gajanan", "Nanded", 24).yob);
+// function getData(a, b, c) {
+//   return {
+//     name: a,
+//     address: b,
+//     age: c,
+//     yob,
+//   };
+// }
+// function yob() {
+//   return new Date().getFullYear()-this.age;
+// }
+// console.log(getData("gajanan", "Nanded", 24).yob== getData("gajanan", "Nanded", 24).yob);
+
+//==============================================================================================
