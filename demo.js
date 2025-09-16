@@ -401,3 +401,21 @@ console.dir(x);
 // console.log(getData("gajanan", "Nanded", 24).yob== getData("gajanan", "Nanded", 24).yob);
 
 //==============================================================================================
+
+setTimeout(() => {
+  console.log(10);
+}, 2000);
+const registry = {},
+  id = 0;
+function customTimer(callback, timer = new Date().getTime()) {
+  let curr = new Date().getTime();
+  registry[id] = { callback, timer: timer == curr ? timer : timer + curr };
+  id++;
+  executeTimeout()
+}
+function executeTimeout(){
+   Object.keys(registry).forEach((item) => {
+      
+  });
+}
+customTimer(() => {});
