@@ -314,10 +314,22 @@ async function get() {
 //   r.current = n;
 //   console.log("Parent rendered");
 // });
+function useToggle(){
+  const [count,setCount] =useState(0)
+  function increment(){
+    setCount(prev=>prev+1)
+  }
+  function decrement(){
+    setCount(prev=>prev-1)
+  }
+  return {count, increment, decrement}
+
+}
 function App() {
   const [name, setName] = useState("");
   useEffect(() => {});
   const ref = useRef<any>("");
+  const {count, increment, decrement} = useToggle()
 
   // const req = new XMLHttpRequest();
   // req.open("GET", "http://localhost:3000/read");
@@ -325,11 +337,11 @@ function App() {
   // req.onloadend = function () {
   //   console.log(req.response, "lorem");
   // };
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
-  if (count == 1) {
-    throw new Error("Error");
-  }
+  // if (count == 1) {
+  //   throw new Error("Error");
+  // }
   return (
     // <div className="container mx-auto pt-3 flex flex-col space-y-2">
     //   <p className="text-3xl">Component update with state</p>
@@ -364,7 +376,12 @@ function App() {
     //     Click to increment
     //   </button>
     // </div>
-    <DraggableStickyNotes/>
+    // <DraggableStickyNotes/>
+    <>
+    {count}
+    <button  onClick={increment}> click</button>
+    </>
+
     // <div style={{height:"200vh"}}>
     // <AlertComponent>
     //   <AlertComponent.Trigger>
