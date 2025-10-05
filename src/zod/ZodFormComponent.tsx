@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+
 interface Inputs {
   firstName: string;
   lastName: string;
