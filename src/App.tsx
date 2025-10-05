@@ -241,6 +241,7 @@ import Main from "./ProductStore/Main";
 import DataTable from "./DataTable/DataTable";
 import AlertComponent from "./AlertDialog/AlertComponent";
 import DraggableStickyNotes from "./DraggableStickyNotes/DraggableStickyNotes";
+import UseDeferredValue from "./hooks/useDeferredValue";
 
 // function App() {
 //   const [data, setData] = useState("");
@@ -378,8 +379,7 @@ function App() {
     // </div>
     // <DraggableStickyNotes/>
     <>
-    {count}
-    <button  onClick={increment}> click</button>
+   <UseDeferredValue/>
     </>
 
     // <div style={{height:"200vh"}}>
