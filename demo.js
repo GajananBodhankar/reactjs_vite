@@ -402,20 +402,28 @@ console.dir(x);
 
 //==============================================================================================
 
-setTimeout(() => {
-  console.log(10);
-}, 2000);
-const registry = {},
+let registry = {},
   id = 0;
-function customTimer(callback, timer = new Date().getTime()) {
+function customTimer(callback, timer) {
   let curr = new Date().getTime();
-  registry[id] = { callback, timer: timer == curr ? timer : timer + curr };
   id++;
-  executeTimeout()
+  registry[id] = { callback, timer: curr + timer, initial: timer };
+  executeTimer();
+  return id;
 }
-function executeTimeout(){
-   Object.keys(registry).forEach((item) => {
-      
+
+function executeTimer() {
+  Object.entries(registry).forEach(([id, { callback, timer, initial }]) => {
+    let curr = new Date().getTime();
+    if (curr >= timer) {
+      callback();
+      registry[id].timer = timer + initial;
+    }
   });
+  requestIdleCallback(executeTimer);
 }
-customTimer(() => {});
+
+customTimer(() => console.log(0), 2000);
+
+//==============================================================================================
+
