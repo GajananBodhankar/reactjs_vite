@@ -20,7 +20,7 @@ curry.placeholder = Symbol();
 
 // // let result = curry(join);
 // // console.log(result(_, _, _)(1)(_, 3)(2));
-
+// 1 2 3
 // // function check() {
 // //   throw new Error("Pass an argument");
 // // }
