@@ -402,28 +402,27 @@ console.dir(x);
 
 //==============================================================================================
 
-let registry = {},
-  id = 0;
-function customTimer(callback, timer) {
-  let curr = new Date().getTime();
-  id++;
-  registry[id] = { callback, timer: curr + timer, initial: timer };
-  executeTimer();
-  return id;
-}
+// let registry = {},
+//   id = 0;
+// function customTimer(callback, timer) {
+//   let curr = new Date().getTime();
+//   id++;
+//   registry[id] = { callback, timer: curr + timer, initial: timer };
+//   executeTimer();
+//   return id;
+// }
 
-function executeTimer() {
-  Object.entries(registry).forEach(([id, { callback, timer, initial }]) => {
-    let curr = new Date().getTime();
-    if (curr >= timer) {
-      callback();
-      registry[id].timer = timer + initial;
-    }
-  });
-  requestIdleCallback(executeTimer);
-}
+// function executeTimer() {
+//   Object.entries(registry).forEach(([id, { callback, timer, initial }]) => {
+//     let curr = new Date().getTime();
+//     if (curr >= timer) {
+//       callback();
+//       registry[id].timer = timer + initial;
+//     }
+//   });
+//   requestIdleCallback(executeTimer);
+// }
 
-customTimer(() => console.log(0), 2000);
+// customTimer(() => console.log(0), 2000);
 
 //==============================================================================================
-
