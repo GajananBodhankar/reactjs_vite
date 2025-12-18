@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./main.css";
 import { flushSync } from "react-dom";
 import ReactCompiler from "./ReactCompiler/ReactCompiler";
+
 function App() {
   const [name, setName] = useState("");
   useEffect(() => {
