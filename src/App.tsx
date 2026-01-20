@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { ReactElement, Ref, RefObject, useEffect, useRef, useState } from "react";
 import "./main.css";
 import { flushSync } from "react-dom";
 import ReactCompiler from "./ReactCompiler/ReactCompiler";
 function App() {
   const [name, setName] = useState("");
+  const refer = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    console.log("rendered");
+    console.log("rendered", refer.current.__reactFiber$jiuw8gqa6s, Object.keys(refer.current));
+
   });
   return (
-    <div>
+    <div ref={refer}>
       App
       {/* <input
         type="text"
@@ -22,8 +24,8 @@ function App() {
         }}
       /> */}
       <p>{name}</p>
-      <button onClick={()=>setName(name.concat(" hi"))}>Change</button>
-      <ReactCompiler/>
+      <button onClick={() => setName(name.concat(" hi"))}>Change</button>
+      <ReactCompiler />
     </div>
   );
 }
