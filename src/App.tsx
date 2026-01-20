@@ -7,6 +7,7 @@ function App() {
   const [name, setName] = useState("");
   const refer = useRef<HTMLDivElement>(null);
   useEffect(() => {
+    // __reactFiber$jiuw8gqa6s this key changes on every refresh, so change it w.r.t to render
     console.log("rendered", refer.current.__reactFiber$jiuw8gqa6s, Object.keys(refer.current));
 
   });
