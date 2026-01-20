@@ -2,6 +2,7 @@ import React, { ReactElement, Ref, RefObject, useEffect, useRef, useState } from
 import "./main.css";
 import { flushSync } from "react-dom";
 import ReactCompiler from "./ReactCompiler/ReactCompiler";
+
 function App() {
   const [name, setName] = useState("");
   const refer = useRef<HTMLDivElement>(null);
